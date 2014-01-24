@@ -4,7 +4,7 @@ namespace SharpDox.Plugins.Chm
 {
     public class ChmStrings : ILocalStrings
     {
-        private string _description = "This exporter creates a Windows Helpfile (chm). It supports multilanguage documentations, articles and namespace descriptions.";
+        private string _description = "This exporter creates a Windows Helpfile (chm). It supports multilanguage documentation, articles and namespace descriptions.";
         private string _start = "Starting chm exporter";
         private string _createStylesheet = "Creating stylesheet";
         private string _createIndex = "Creating index file";
@@ -32,6 +32,8 @@ namespace SharpDox.Plugins.Chm
         private string _syntaxBoxBackgroundColor = "Syntaxbox Background Color";
         private string _syntaxBoxBorderColor = "Syntaxbox Border Color";
         private string _syntaxBoxTextColor = "Syntaxbox Text Color";
+        private string _compilerNotFound = "Could not find the chm compiler. Please set the correct path in the chm settings.";
+        private string _compilerPath = "Path to chm compiler";
 
         public string DisplayName { get { return "ChmExporter"; } }
 
@@ -201,6 +203,18 @@ namespace SharpDox.Plugins.Chm
         {
             get { return _description; }
             set { _description = value; }
+        }
+
+        public string CompilerNotFound
+        {
+            get { return _compilerNotFound; }
+            set { _compilerNotFound = value; }
+        }
+
+        public string CompilerPath
+        {
+            get { return _compilerPath; }
+            set { _compilerPath = value; }
         }
     }
 }

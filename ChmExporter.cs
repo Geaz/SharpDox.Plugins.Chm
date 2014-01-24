@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Xml;
 using SharpDox.Model.Repository;
 using SharpDox.Sdk.Exporter;
 using SharpDox.Plugins.Chm.Templates.Strings;
@@ -9,9 +10,10 @@ namespace SharpDox.Plugins.Chm
 {
     public class ChmExporter : IExporter
     {
+        public event Action<string> OnRequirementsWarning;
         public event Action<string> OnStepMessage;
         public event Action<int> OnStepProgress;
-        
+
         public ChmExporter(ChmConfig chmConfig, ChmStrings chmStrings)
         {
             ChmConfig = chmConfig;
@@ -36,6 +38,19 @@ namespace SharpDox.Plugins.Chm
 
                 ExecuteOnStepProgress(100);
             }
+        }
+
+        public bool CheckRequirements()
+        {
+            var config = Helper.LoadConfig();
+            var compilerPath = config.SelectSingleNode("CompilerPath");
+            var requirements = compilerPath != null && !string.IsNullOrEmpty(compilerPath.InnerText) && File.Exists(Path.Combine(compilerPath.InnerText, "hhc.exe"));
+            if (!requirements)
+            {
+                ExecuteOnRequirementsWarning(ChmStrings.CompilerNotFound);
+            }
+
+            return requirements;
         }
 
         private IStrings GetCurrentStrings()
@@ -63,6 +78,15 @@ namespace SharpDox.Plugins.Chm
             if (handler != null)
             {
                 handler(progress);
+            }
+        }
+
+        internal void ExecuteOnRequirementsWarning(string message)
+        {
+            var handler = OnRequirementsWarning;
+            if (handler != null)
+            {
+                handler(message);
             }
         }
 

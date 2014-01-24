@@ -1,4 +1,6 @@
 ﻿using System;
+using System.IO;
+using System.Xml;
 
 namespace SharpDox.Plugins.Chm
 {
@@ -31,6 +33,14 @@ namespace SharpDox.Plugins.Chm
                 link = string.Format("{0}.html", identifier.Replace(' ', '_'));
             }
             return link;
+        }
+
+        public static XmlDocument LoadConfig()
+        {
+            var config = new XmlDocument();
+            config.Load(Path.Combine(Path.GetDirectoryName(typeof(ChmExporter).Assembly.Location), "config.xml"));
+
+            return config;
         }
     }
 }
