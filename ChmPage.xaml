@@ -6,7 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:controls="clr-namespace:SharpDox.Resources.Controls;assembly=SharpDox.Resources"
              mc:Ignorable="d" 
-             d:DesignHeight="475" d:DesignWidth="400">
+             d:DesignHeight="500" d:DesignWidth="400">
 
     <UserControl.Resources>
         <ResourceDictionary>
@@ -18,10 +18,10 @@
         </ResourceDictionary>
     </UserControl.Resources>
 
-    <Grid Name="mainGrid" Height="475" Width="400">
+    <Grid Name="mainGrid" Height="500" Width="400">
         <StackPanel Height="Auto" HorizontalAlignment="Left" Margin="15,0,15,0" Name="stackPanel2" VerticalAlignment="Top" Width="Auto">
             <DockPanel Height="Auto" HorizontalAlignment="Left" Margin="0,5,0,20" Name="dockPanel26" VerticalAlignment="Top" Width="370">
-                <Label Content="{Binding ElementName=Window, Path=Strings.CompilerPath}" ContentStringFormat="{}{0}:" Width="200" Height="Auto" Name="label19" Style="{StaticResource BodyText}" />
+                <Label Content="{Binding ElementName=Window, Path=Strings.CompilerPath}" ContentStringFormat="{}{0}:" Width="175" Height="Auto" Name="label19" Style="{StaticResource BodyText}" />
                 <TextBox ButtonBase.Click="OnBrowseCompiler" Text="{Binding InputPath, UpdateSourceTrigger=PropertyChanged}" Height="Auto" Name="tbInputPath" Width="Auto" IsEnabled="True" IsReadOnly="False" Style="{StaticResource TextBoxChooser}" TextChanged="OnTextChanged" />
             </DockPanel>
             <DockPanel Height="Auto" HorizontalAlignment="Left" Margin="0,5,0,0" Name="dockPanel6" VerticalAlignment="Top" Width="370">
