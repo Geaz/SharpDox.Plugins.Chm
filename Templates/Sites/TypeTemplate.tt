@@ -7,6 +7,7 @@
 <#@ import namespace="SharpDox.Model.Repository" #>
 <#@ import namespace="SharpDox.Plugins.Chm.Templates.Strings" #>
 <#@ import namespace="SharpDox.Plugins.Chm.Templates.Sites" #>
+<#@ import namespace="SharpDox.Model.Documentation.Token" #>
 <#@ import namespace="SharpDox.Sdk.Config" #>
 <#@ import namespace="SharpDox.UML" #>
 <#@ import namespace="MarkdownSharp" #>
@@ -167,6 +168,58 @@
 						</div>
 					<# } #>
 
+					<# if(SDType.Documentation[language].SeeAlsos.Count > 0) { #>
+						<h3 class="box-title"><#= Strings.SeeAlso #></h3>
+						<div class="list-box">
+							<ul>
+							<# foreach(var sdToken in SDType.Documentation[language].SeeAlsos) 
+							{ 
+								var seeAlso = (SDSeeToken)sdToken;
+								if(!string.IsNullOrEmpty(seeAlso.DeclaringType))
+								{
+									var identifier = string.Format("{0}.{1}", seeAlso.DeclaringType, seeAlso.Name);
+									var sdMember = SDRepository.GetMemberByIdentifier(identifier);
+									if(sdMember != null)
+									{
+										#> <li><a href="<#= sdMember.DeclaringType.Guid #>.html#<#= sdMember.Guid #>"><#= sdMember.Name #></a></li> <#
+									}
+								}
+								else
+								{
+									var identifier = string.Format("{0}.{1}", seeAlso.Namespace, seeAlso.Name);
+									var sdType = SDRepository.GetTypeByIdentifier(identifier);
+									if(sdType != null)
+									{
+										#> <li><a href="<#= sdType.Guid #>.html"><#= sdType.Fullname #></a></li> <#
+									}
+								} 
+							} #>
+							</ul>
+						</div>
+					<# } #>
+
+				<# } #>
+
+				<# if(SDType.Uses.Count > 0) { #>
+					<h3 class="box-title"><#= Strings.Uses #></h3>
+					<div class="list-box">
+						<ul>
+						<# foreach(var use in SDType.Uses) { #>
+							<li><a href="<#= use.Guid #>.html"><#= use.Name #></a></li>
+						<# } #>
+						</ul>
+					</div>
+				<# } #>
+
+				<# if(SDType.UsedBy.Count > 0) { #>
+					<h3 class="box-title"><#= Strings.UsedBy #></h3>
+					<div class="list-box">
+						<ul>
+						<# foreach(var used in SDType.UsedBy) { #>
+							<li><a href="<#= used.Guid #>.html"><#= used.Name #></a></li>
+						<# } #>
+						</ul>
+					</div>
 				<# } #>
 
 				<h2 class="box-title"><#= Strings.Members #></h2>
@@ -275,28 +328,6 @@
 					</table>
 				</div>
 
-				<# if(SDType.Uses.Count > 0) { #>
-					<h3 class="box-title"><#= Strings.Uses #></h3>
-					<div class="list-box">
-						<ul>
-						<# foreach(var use in SDType.Uses) { #>
-							<li><a href="<#= use.Guid #>.html"><#= use.Name #></a></li>
-						<# } #>
-						</ul>
-					</div>
-				<# } #>
-
-				<# if(SDType.UsedBy.Count > 0) { #>
-					<h3 class="box-title"><#= Strings.UsedBy #></h3>
-					<div class="list-box">
-						<ul>
-						<# foreach(var used in SDType.UsedBy) { #>
-							<li><a href="<#= used.Guid #>.html"><#= used.Name #></a></li>
-						<# } #>
-						</ul>
-					</div>
-				<# } #>
-
 				<#	if(!SDType.IsClassDiagramEmpty()) { #>
 					<div class="diagram-box">
 						<img class="diagram-image" src="diagrams/<#= SDType.Guid #>.png"/>
@@ -307,10 +338,10 @@
 
 		<#	foreach (var constructor in SDType.Constructors)
 			{
-				var memberTemplate = new MethodTemplate
+				var memberTemplate = new MemberTemplate
 				{
 					ProjectInfo = SDRepository.ProjectInfo, 
-					SDMethod = constructor, 
+					SDMember = constructor, 
 					SDNamespace = SDType.Namespace,
 					SDType = SDType, 
 					CurrentLanguage = CurrentLanguage, 
@@ -322,10 +353,10 @@
 		<#  }
 			foreach (var method in SDType.Methods)
 			{
-				var memberTemplate = new MethodTemplate
+				var memberTemplate = new MemberTemplate
 				{
 					ProjectInfo = SDRepository.ProjectInfo, 
-					SDMethod = method, 
+					SDMember = method, 
 					SDNamespace = SDType.Namespace,
 					SDType = SDType, 
 					CurrentLanguage = CurrentLanguage, 
@@ -337,40 +368,46 @@
 		<#  }
 			foreach (var field in SDType.Fields)
 			{
-				var memberTemplate = new FieldTemplate
+				var memberTemplate = new MemberTemplate
 				{
 					ProjectInfo = SDRepository.ProjectInfo, 
 					SDNamespace = SDType.Namespace, 
-					SDField = field, 
+					SDMember = field, 
 					SDType = SDType, 
 					CurrentLanguage = CurrentLanguage, 
-					Strings = Strings
+					Strings = Strings,
+					SDRepository = SDRepository,
+					TmpFilepath = TmpFilepath
 				}; #>
 				<#= memberTemplate.TransformText() #>
 		<#  }
 			foreach (var property in SDType.Properties)
 			{
-				var memberTemplate = new PropertyTemplate
+				var memberTemplate = new MemberTemplate
 				{
 					ProjectInfo = SDRepository.ProjectInfo, 
 					SDNamespace = SDType.Namespace, 
-					SDProperty = property, 
+					SDMember = property, 
 					SDType = SDType, 
 					CurrentLanguage = CurrentLanguage, 
-					Strings = Strings
+					Strings = Strings,
+					SDRepository = SDRepository,
+					TmpFilepath = TmpFilepath
 				}; #>
 				<#= memberTemplate.TransformText() #>
 		<#  }
 			foreach (var sdEvent in SDType.Events)
 			{
-				var memberTemplate = new EventTemplate
+				var memberTemplate = new MemberTemplate
 				{
 					ProjectInfo = SDRepository.ProjectInfo, 
 					SDNamespace = SDType.Namespace, 
-					SDEvent = sdEvent, 
+					SDMember = sdEvent, 
 					SDType = SDType, 
 					CurrentLanguage = CurrentLanguage, 
-					Strings = Strings
+					Strings = Strings,
+					SDRepository = SDRepository,
+					TmpFilepath = TmpFilepath
 				}; #>
 				<#= memberTemplate.TransformText() #>
 			<# } #>

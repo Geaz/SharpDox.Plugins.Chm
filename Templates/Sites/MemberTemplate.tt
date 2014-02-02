@@ -1,0 +1,150 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Net" #>
+<#@ import namespace="System.IO" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="SharpDox.Model.Repository" #>
+<#@ import namespace="SharpDox.Model.Repository.Members" #>
+<#@ import namespace="SharpDox.Model.Documentation.Token" #>
+<#@ import namespace="SharpDox.Plugins.Chm.Templates.Strings" #>
+<#@ import namespace="SharpDox.Sdk.Config" #>
+<#@ import namespace="SharpDox.UML" #>
+<#@ import namespace="MarkdownSharp" #>
+
+<div id="<#= SDMember.Guid #>" class="typesite">
+	<div id="header">
+		<h2 class="type-title"><#= SDMember.Name #></h2>
+		<span class="namespace-title"><#= SDType.Namespace.Fullname #></span>
+	</div>
+	<div id="subheader">
+		<a href="<#= ProjectInfo.ProjectName.Replace(" ", "") #>-Index.html">Start</a> > <a href="<#= SDNamespace.Guid #>.html"><#= SDNamespace.Fullname #></a> > <a href="<#= SDType.Guid #>.html"><#= SDType.Name #> > <a href="<#= SDMember.Guid #>.html"><#= SDMember.Name #></a>
+	</div>
+
+	<div id="content">
+		<h3 class="box-title"><#= Strings.Syntax #></h3>
+		<div class="syntax-box">
+			<#= WebUtility.HtmlEncode(SDMember.Syntax) #>
+		</div>
+        
+		<# if(SDMember.Documentation.Count > 0) { #>
+
+			<# var language = SDMember.Documentation.ContainsKey(CurrentLanguage) ? CurrentLanguage : "default";
+			if(SDMember.Documentation[language].Summary.Count > 0) { #>
+				<h3 class="box-title"><#= Strings.Summary #></h3>
+				<div class="doc-box markdown">
+					<#= new Markdown().Transform(SDMember.Documentation[language].Summary.ToMarkdown()) #>
+				</div>
+			<# } #>
+
+			<# if(SDMember.Documentation[language].Remarks.Count > 0) { #>
+				<h3 class="box-title"><#= Strings.Remarks #></h3>
+				<div class="doc-box markdown">
+					<#= new Markdown().Transform(SDMember.Documentation[language].Remarks.ToMarkdown()) #>
+				</div>
+			<# } #>
+
+			<# if(SDMember.Documentation[language].Example.Count > 0) { #>
+				<h3 class="box-title"><#= Strings.Example #></h3>
+				<div class="doc-box markdown">
+					<#= new Markdown().Transform(SDMember.Documentation[language].Example.ToMarkdown()) #>
+				</div>
+			<# } #>
+
+			<# if(SDMember.Documentation[language].Returns.Count > 0) { #>
+				<h3 class="box-title"><#= Strings.Returns #></h3>
+				<div class="doc-box markdown">
+					<#= new Markdown().Transform(SDMember.Documentation[language].Returns.ToMarkdown()) #>
+				</div>
+			<# } #>
+
+			<# if(SDMember.Documentation[language].Exceptions.Count > 0) { #>
+				<h3 class="box-title"><#= Strings.Exceptions #></h3>
+				<div class="doc-box markdown">
+					<# foreach(var exception in SDMember.Documentation[language].Exceptions) { #>
+						<p><#= exception.Key #></p>
+						<div class="inline">
+							<#= new Markdown().Transform(exception.Value.ToMarkdown()) #>
+						</div>
+					<# } #>
+				</div>
+			<# } #>
+
+			<# if(SDMember.Documentation[language].Params.Count > 0) { #>
+				<h3 class="box-title"><#= Strings.Parameters #></h3>
+				<div class="doc-box markdown">
+					<# foreach(var parameter in SDMember.Documentation[language].Params) { #>
+						<p><#= parameter.Key #></p>
+						<div class="inline">
+							<#= new Markdown().Transform(parameter.Value.ToMarkdown()) #>
+						</div>
+					<# } #>
+				</div>
+			<# } #>
+
+			<# if(SDMember.Documentation[language].TypeParams.Count > 0) { #>
+				<h3 class="box-title"><#= Strings.TypeParameters #></h3>
+				<div class="doc-box markdown">
+					<# foreach(var typeParameter in SDMember.Documentation[language].TypeParams) { #>
+						<p><#= typeParameter.Key #></p>
+						<div class="inline">
+							<#= new Markdown().Transform(typeParameter.Value.ToMarkdown()) #>
+						</div>
+					<# } #>
+				</div>
+			<# } #>
+
+			<# if(SDMember.Documentation[language].SeeAlsos.Count > 0) { #>
+				<h3 class="box-title"><#= Strings.SeeAlso #></h3>
+				<div class="list-box">
+					<ul>
+					<# foreach(var sdToken in SDMember.Documentation[language].SeeAlsos) 
+					{ 
+						var seeAlso = (SDSeeToken)sdToken;
+						if(!string.IsNullOrEmpty(seeAlso.DeclaringType))
+						{
+							var identifier = string.Format("{0}.{1}", seeAlso.DeclaringType, seeAlso.Name);
+							var sdMember = SDRepository.GetMemberByIdentifier(identifier);
+							if(sdMember != null)
+                            {
+								#> <li><a href="<#= sdMember.DeclaringType.Guid #>.html#<#= sdMember.Guid #>"><#= sdMember.Name #></a></li> <#
+                            }
+						}
+						else
+						{
+							var identifier = string.Format("{0}.{1}", seeAlso.Namespace, seeAlso.Name);
+							var sdType = SDRepository.GetTypeByIdentifier(identifier);
+							if(sdType != null)
+                            {
+								#> <li><a href="<#= sdType.Guid #>.html"><#= sdType.Fullname #></a></li> <#
+                            }
+						} 
+					} #>
+					</ul>
+				</div>
+			<# } #>
+
+		<# } #>
+
+		<#	if(SDMember is SDMethod && !((SDMethod)SDMember).IsSequenceDiagramEmpty()) { 
+			((SDMethod)SDMember).GetSequenceDiagram(SDRepository.GetAllTypes()).ToPng(Path.Combine(TmpFilepath, "diagrams", SDMember.Guid + ".png")); #>
+
+			<div class="diagram-box">
+				<img class="diagram-image" src="diagrams/<#= SDMember.Guid #>.png"/>
+			</div>
+
+		<# } #>
+	</div>
+</div>
+
+<#+ 
+public SDType SDType { get; set; } 
+public SDMember SDMember { get; set; } 
+public SDNamespace SDNamespace { get; set; }
+public SDProjectInfo ProjectInfo { get; set; }
+public string CurrentLanguage { get; set; }
+public IStrings Strings { get; set; }
+public SDRepository SDRepository { get; set; }
+public string TmpFilepath { get; set; }
+#>

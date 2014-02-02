@@ -9,6 +9,7 @@
         public string Events { get { return "Events"; } }
         public string Name { get { return "Name"; } }
         public string Description { get { return "Description"; } }
+        public string SeeAlso { get { return "See also"; } }
         public string Syntax { get { return "Syntax"; } }
         public string Summary { get { return "Summary"; } }
         public string Remarks { get { return "Remarks"; } }

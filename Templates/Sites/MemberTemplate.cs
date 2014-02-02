@@ -12,11 +12,14 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
     using System.Linq;
     using System.Text;
     using System.Net;
+    using System.IO;
     using System.Collections.Generic;
     using SharpDox.Model.Repository;
     using SharpDox.Model.Repository.Members;
+    using SharpDox.Model.Documentation.Token;
     using SharpDox.Plugins.Chm.Templates.Strings;
     using SharpDox.Sdk.Config;
+    using SharpDox.UML;
     using MarkdownSharp;
     using System;
     
@@ -24,9 +27,9 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+    #line 1 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public partial class PropertyTemplate : PropertyTemplateBase
+    public partial class MemberTemplate : MemberTemplateBase
     {
 #line hidden
         /// <summary>
@@ -34,386 +37,498 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n\n<div id=\"");
+            this.Write("\r\n<div id=\"");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SDProperty.Guid));
+            #line 16 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SDMember.Guid));
             
             #line default
             #line hidden
-            this.Write("\" class=\"typesite\">\n\t<div id=\"header\">\n\t\t<h2 class=\"type-title\">");
+            this.Write("\" class=\"typesite\">\r\n\t<div id=\"header\">\r\n\t\t<h2 class=\"type-title\">");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SDProperty.Name));
+            #line 18 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SDMember.Name));
             
             #line default
             #line hidden
-            this.Write("</h2>\n\t\t<span class=\"namespace-title\">");
+            this.Write("</h2>\r\n\t\t<span class=\"namespace-title\">");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 19 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SDType.Namespace.Fullname));
             
             #line default
             #line hidden
-            this.Write("</span>\n\t</div>\n\t<div id=\"subheader\">\n\t\t<a href=\"");
+            this.Write("</span>\r\n\t</div>\r\n\t<div id=\"subheader\">\r\n\t\t<a href=\"");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 22 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(ProjectInfo.ProjectName.Replace(" ", "")));
             
             #line default
             #line hidden
             this.Write("-Index.html\">Start</a> > <a href=\"");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 22 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SDNamespace.Guid));
             
             #line default
             #line hidden
             this.Write(".html\">");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 22 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SDNamespace.Fullname));
             
             #line default
             #line hidden
             this.Write("</a> > <a href=\"");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 22 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SDType.Guid));
             
             #line default
             #line hidden
             this.Write(".html\">");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 22 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SDType.Name));
             
             #line default
             #line hidden
             this.Write(" > <a href=\"");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SDProperty.Guid));
+            #line 22 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SDMember.Guid));
             
             #line default
             #line hidden
             this.Write(".html\">");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SDProperty.Name));
+            #line 22 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SDMember.Name));
             
             #line default
             #line hidden
-            this.Write("</a>\n\t</div>\n\t\t\n\t<div id=\"content\">\n\t\t<h3 class=\"box-title\">");
+            this.Write("</a>\r\n\t</div>\r\n\r\n\t<div id=\"content\">\r\n\t\t<h3 class=\"box-title\">");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 26 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Strings.Syntax));
             
             #line default
             #line hidden
-            this.Write("</h3>\n\t\t<div class=\"syntax-box\">\n\t\t\t");
+            this.Write("</h3>\r\n\t\t<div class=\"syntax-box\">\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(WebUtility.HtmlEncode(SDProperty.Syntax)));
-            
-            #line default
-            #line hidden
-            this.Write("\n\t\t</div>\n        \n\t\t");
-            
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
- var language = SDProperty.Documentation.ContainsKey(CurrentLanguage) ? CurrentLanguage : "default";
-		if(SDProperty.Documentation.Count > 0) { 
+            #line 28 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(WebUtility.HtmlEncode(SDMember.Syntax)));
             
             #line default
             #line hidden
-            this.Write("\n\n\t\t\t");
+            this.Write("\r\n\t\t</div>\r\n        \r\n\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
- if(SDProperty.Documentation[language].Summary.Count > 0) { 
+            #line 31 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+ if(SDMember.Documentation.Count > 0) { 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t<h3 class=\"box-title\">");
+            this.Write("\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 33 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+ var language = SDMember.Documentation.ContainsKey(CurrentLanguage) ? CurrentLanguage : "default";
+			if(SDMember.Documentation[language].Summary.Count > 0) { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t<h3 class=\"box-title\">");
+            
+            #line 35 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Strings.Summary));
             
             #line default
             #line hidden
-            this.Write("</h3>\n\t\t\t\t<div class=\"doc-box markdown\">\n\t\t\t\t\t");
+            this.Write("</h3>\r\n\t\t\t\t<div class=\"doc-box markdown\">\r\n\t\t\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(new Markdown().Transform(SDProperty.Documentation[language].Summary.ToMarkdown())));
+            #line 37 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(new Markdown().Transform(SDMember.Documentation[language].Summary.ToMarkdown())));
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t</div>\n\t\t\t");
+            this.Write("\r\n\t\t\t\t</div>\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 39 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n\n\t\t\t");
+            this.Write("\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
- if(SDProperty.Documentation[language].Remarks.Count > 0) { 
+            #line 41 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+ if(SDMember.Documentation[language].Remarks.Count > 0) { 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t<h3 class=\"box-title\">");
+            this.Write("\t\t\t\t<h3 class=\"box-title\">");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 42 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Strings.Remarks));
             
             #line default
             #line hidden
-            this.Write("</h3>\n\t\t\t\t<div class=\"doc-box markdown\">\n\t\t\t\t\t");
+            this.Write("</h3>\r\n\t\t\t\t<div class=\"doc-box markdown\">\r\n\t\t\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(new Markdown().Transform(SDProperty.Documentation[language].Remarks.ToMarkdown())));
+            #line 44 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(new Markdown().Transform(SDMember.Documentation[language].Remarks.ToMarkdown())));
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t</div>\n\t\t\t");
+            this.Write("\r\n\t\t\t\t</div>\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 46 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n\n\t\t\t");
+            this.Write("\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
- if(SDProperty.Documentation[language].Example.Count > 0) { 
+            #line 48 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+ if(SDMember.Documentation[language].Example.Count > 0) { 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t<h3 class=\"box-title\">");
+            this.Write("\t\t\t\t<h3 class=\"box-title\">");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 49 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Strings.Example));
             
             #line default
             #line hidden
-            this.Write("</h3>\n\t\t\t\t<div class=\"doc-box markdown\">\n\t\t\t\t\t");
+            this.Write("</h3>\r\n\t\t\t\t<div class=\"doc-box markdown\">\r\n\t\t\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(new Markdown().Transform(SDProperty.Documentation[language].Example.ToMarkdown())));
+            #line 51 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(new Markdown().Transform(SDMember.Documentation[language].Example.ToMarkdown())));
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t</div>\n\t\t\t");
+            this.Write("\r\n\t\t\t\t</div>\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 53 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n\n\t\t\t");
+            this.Write("\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
- if(SDProperty.Documentation[language].Returns.Count > 0) { 
+            #line 55 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+ if(SDMember.Documentation[language].Returns.Count > 0) { 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t<h3 class=\"box-title\">");
+            this.Write("\t\t\t\t<h3 class=\"box-title\">");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 56 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Strings.Returns));
             
             #line default
             #line hidden
-            this.Write("</h3>\n\t\t\t\t<div class=\"doc-box markdown\">\n\t\t\t\t\t");
+            this.Write("</h3>\r\n\t\t\t\t<div class=\"doc-box markdown\">\r\n\t\t\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(new Markdown().Transform(SDProperty.Documentation[language].Returns.ToMarkdown())));
+            #line 58 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(new Markdown().Transform(SDMember.Documentation[language].Returns.ToMarkdown())));
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t</div>\n\t\t\t");
+            this.Write("\r\n\t\t\t\t</div>\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 60 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n\n\t\t\t");
+            this.Write("\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
- if(SDProperty.Documentation[language].Exceptions.Count > 0) { 
+            #line 62 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+ if(SDMember.Documentation[language].Exceptions.Count > 0) { 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t<h3 class=\"box-title\">");
+            this.Write("\t\t\t\t<h3 class=\"box-title\">");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 63 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Strings.Exceptions));
             
             #line default
             #line hidden
-            this.Write("</h3>\n\t\t\t\t<div class=\"doc-box markdown\">\n\t\t\t\t\t");
+            this.Write("</h3>\r\n\t\t\t\t<div class=\"doc-box markdown\">\r\n\t\t\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
- foreach(var exception in SDProperty.Documentation[language].Exceptions) { 
+            #line 65 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+ foreach(var exception in SDMember.Documentation[language].Exceptions) { 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t\t\t<p>");
+            this.Write("\t\t\t\t\t\t<p>");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 66 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(exception.Key));
             
             #line default
             #line hidden
-            this.Write("</p>\n\t\t\t\t\t\t<div class=\"inline\">\n\t\t\t\t\t\t\t");
+            this.Write("</p>\r\n\t\t\t\t\t\t<div class=\"inline\">\r\n\t\t\t\t\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 68 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(new Markdown().Transform(exception.Value.ToMarkdown())));
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t\t\t</div>\n\t\t\t\t\t");
+            this.Write("\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 70 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t</div>\n\t\t\t");
+            this.Write("\t\t\t\t</div>\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 72 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n\n\t\t\t");
+            this.Write("\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
- if(SDProperty.Documentation[language].Params.Count > 0) { 
+            #line 74 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+ if(SDMember.Documentation[language].Params.Count > 0) { 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t<h3 class=\"box-title\">");
+            this.Write("\t\t\t\t<h3 class=\"box-title\">");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 75 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Strings.Parameters));
             
             #line default
             #line hidden
-            this.Write("</h3>\n\t\t\t\t<div class=\"doc-box markdown\">\n\t\t\t\t\t");
+            this.Write("</h3>\r\n\t\t\t\t<div class=\"doc-box markdown\">\r\n\t\t\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
- foreach(var parameter in SDProperty.Documentation[language].Params) { 
+            #line 77 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+ foreach(var parameter in SDMember.Documentation[language].Params) { 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t\t\t<p>");
+            this.Write("\t\t\t\t\t\t<p>");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 78 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(parameter.Key));
             
             #line default
             #line hidden
-            this.Write("</p>\n\t\t\t\t\t\t<div class=\"inline\">\n\t\t\t\t\t\t\t");
+            this.Write("</p>\r\n\t\t\t\t\t\t<div class=\"inline\">\r\n\t\t\t\t\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 80 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(new Markdown().Transform(parameter.Value.ToMarkdown())));
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t\t\t</div>\n\t\t\t\t\t");
+            this.Write("\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 82 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t</div>\n\t\t\t");
+            this.Write("\t\t\t\t</div>\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 84 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n\n\t\t\t");
+            this.Write("\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
- if(SDProperty.Documentation[language].TypeParams.Count > 0) { 
+            #line 86 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+ if(SDMember.Documentation[language].TypeParams.Count > 0) { 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t<h3 class=\"box-title\">");
+            this.Write("\t\t\t\t<h3 class=\"box-title\">");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 87 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Strings.TypeParameters));
             
             #line default
             #line hidden
-            this.Write("</h3>\n\t\t\t\t<div class=\"doc-box markdown\">\n\t\t\t\t\t");
+            this.Write("</h3>\r\n\t\t\t\t<div class=\"doc-box markdown\">\r\n\t\t\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
- foreach(var typeParameter in SDProperty.Documentation[language].TypeParams) { 
+            #line 89 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+ foreach(var typeParameter in SDMember.Documentation[language].TypeParams) { 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t\t\t<p>");
+            this.Write("\t\t\t\t\t\t<p>");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 90 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(typeParameter.Key));
             
             #line default
             #line hidden
-            this.Write("</p>\n\t\t\t\t\t\t<div class=\"inline\">\n\t\t\t\t\t\t\t");
+            this.Write("</p>\r\n\t\t\t\t\t\t<div class=\"inline\">\r\n\t\t\t\t\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 92 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(new Markdown().Transform(typeParameter.Value.ToMarkdown())));
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t\t\t</div>\n\t\t\t\t\t");
+            this.Write("\r\n\t\t\t\t\t\t</div>\r\n\t\t\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 94 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t</div>\n\t\t\t");
+            this.Write("\t\t\t\t</div>\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 96 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n\n\t\t");
+            this.Write("\r\n\t\t\t");
             
-            #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+            #line 98 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+ if(SDMember.Documentation[language].SeeAlsos.Count > 0) { 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t<h3 class=\"box-title\">");
+            
+            #line 99 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(Strings.SeeAlso));
+            
+            #line default
+            #line hidden
+            this.Write("</h3>\r\n\t\t\t\t<div class=\"list-box\">\r\n\t\t\t\t\t<ul>\r\n\t\t\t\t\t");
+            
+            #line 102 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+ foreach(var sdToken in SDMember.Documentation[language].SeeAlsos) 
+					{ 
+						var seeAlso = (SDSeeToken)sdToken;
+						if(!string.IsNullOrEmpty(seeAlso.DeclaringType))
+						{
+							var identifier = string.Format("{0}.{1}", seeAlso.DeclaringType, seeAlso.Name);
+							var sdMember = SDRepository.GetMemberByIdentifier(identifier);
+							if(sdMember != null)
+                            {
+								
+            
+            #line default
+            #line hidden
+            this.Write(" <li><a href=\"");
+            
+            #line 111 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(sdMember.DeclaringType.Guid));
+            
+            #line default
+            #line hidden
+            this.Write(".html#");
+            
+            #line 111 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(sdMember.Guid));
+            
+            #line default
+            #line hidden
+            this.Write("\">");
+            
+            #line 111 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(sdMember.Name));
+            
+            #line default
+            #line hidden
+            this.Write("</a></li> ");
+            
+            #line 111 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+
+                            }
+						}
+						else
+						{
+							var identifier = string.Format("{0}.{1}", seeAlso.Namespace, seeAlso.Name);
+							var sdType = SDRepository.GetTypeByIdentifier(identifier);
+							if(sdType != null)
+                            {
+								
+            
+            #line default
+            #line hidden
+            this.Write(" <li><a href=\"");
+            
+            #line 120 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(sdType.Guid));
+            
+            #line default
+            #line hidden
+            this.Write(".html\">");
+            
+            #line 120 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(sdType.Fullname));
+            
+            #line default
+            #line hidden
+            this.Write("</a></li> ");
+            
+            #line 120 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+
+                            }
+						} 
+					} 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t\t</ul>\r\n\t\t\t\t</div>\r\n\t\t\t");
+            
+            #line 126 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n\t</div>\n</div>\n\n");
+            this.Write("\r\n\t\t");
+            
+            #line 128 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t");
+            
+            #line 130 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+	if(SDMember is SDMethod && !((SDMethod)SDMember).IsSequenceDiagramEmpty()) { 
+			((SDMethod)SDMember).GetSequenceDiagram(SDRepository.GetAllTypes()).ToPng(Path.Combine(TmpFilepath, "diagrams", SDMember.Guid + ".png")); 
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t\t<div class=\"diagram-box\">\r\n\t\t\t\t<img class=\"diagram-image\" src=\"diagrams/");
+            
+            #line 134 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SDMember.Guid));
+            
+            #line default
+            #line hidden
+            this.Write(".png\"/>\r\n\t\t\t</div>\r\n\r\n\t\t");
+            
+            #line 137 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\t</div>\r\n</div>\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "E:\Programming\Github\sharpDox\Plugins\ChmExporter\Templates\Sites\PropertyTemplate.tt"
+        #line 141 "E:\Programming\Github\SharpDox.Plugins.Chm\Templates\Sites\MemberTemplate.tt"
  
 public SDType SDType { get; set; } 
-public SDProperty SDProperty { get; set; } 
+public SDMember SDMember { get; set; } 
 public SDNamespace SDNamespace { get; set; }
 public SDProjectInfo ProjectInfo { get; set; }
 public string CurrentLanguage { get; set; }
 public IStrings Strings { get; set; }
+public SDRepository SDRepository { get; set; }
+public string TmpFilepath { get; set; }
 
         
         #line default
@@ -427,7 +542,7 @@ public IStrings Strings { get; set; }
     /// Base class for this transformation
     /// </summary>
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "11.0.0.0")]
-    public class PropertyTemplateBase
+    public class MemberTemplateBase
     {
         #region Fields
         private global::System.Text.StringBuilder generationEnvironmentField;

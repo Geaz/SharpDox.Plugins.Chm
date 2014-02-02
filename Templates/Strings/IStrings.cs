@@ -9,6 +9,7 @@
         string Events { get; }
         string Name { get; }
         string Description { get; }
+        string SeeAlso { get; }
         string Syntax { get; }
         string Summary { get; }
         string Remarks { get; }

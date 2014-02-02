@@ -104,11 +104,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\Sites\FieldTemplate.cs">
-      <DependentUpon>FieldTemplate.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Templates\Nav\HhcTemplate.cs">
       <DependentUpon>HhcTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -154,18 +149,8 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Templates\Sites\MethodTemplate.cs">
-      <DependentUpon>MethodTemplate.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Templates\Sites\PropertyTemplate.cs">
-      <DependentUpon>PropertyTemplate.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Templates\Sites\EventTemplate.cs">
-      <DependentUpon>EventTemplate.tt</DependentUpon>
+    <Compile Include="Templates\Sites\MemberTemplate.cs">
+      <DependentUpon>MemberTemplate.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -212,10 +197,6 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>EmptyArticleTemplate.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Sites\FieldTemplate.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>FieldTemplate.cs</LastGenOutput>
-    </None>
     <None Include="Templates\Nav\HhcTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>HhcTemplate.cs</LastGenOutput>
@@ -252,17 +233,9 @@
       <Generator>TextTemplatingFilePreprocessor</Generator>
       <LastGenOutput>MethodsTemplate.cs</LastGenOutput>
     </None>
-    <None Include="Templates\Sites\MethodTemplate.tt">
+    <None Include="Templates\Sites\MemberTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>MethodTemplate.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\Sites\PropertyTemplate.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>PropertyTemplate.cs</LastGenOutput>
-    </None>
-    <None Include="Templates\Sites\EventTemplate.tt">
-      <Generator>TextTemplatingFilePreprocessor</Generator>
-      <LastGenOutput>EventTemplate.cs</LastGenOutput>
+      <LastGenOutput>MemberTemplate.cs</LastGenOutput>
     </None>
     <None Include="Templates\Sites\NamespaceTemplate.tt">
       <Generator>TextTemplatingFilePreprocessor</Generator>
