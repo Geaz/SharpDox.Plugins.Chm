@@ -4,6 +4,7 @@ namespace SharpDox.Plugins.Chm
 {
     public class ChmStrings : ILocalStrings
     {
+        private string _configTitle = "CHM";
         private string _description = "This exporter creates a Windows Helpfile (chm). It supports multilanguage documentation, articles and namespace descriptions.";
         private string _start = "Starting chm exporter";
         private string _createStylesheet = "Creating stylesheet";
@@ -36,6 +37,12 @@ namespace SharpDox.Plugins.Chm
         private string _compilerPath = "Path to chm compiler";
 
         public string DisplayName { get { return "ChmExporter"; } }
+
+        public string ConfigTitle
+        {
+            get { return _configTitle; }
+            set { _configTitle = value; }
+        }
 
         public string Start
         {

@@ -1,9 +1,13 @@
 ﻿using System.ComponentModel;
 using System;
 using SharpDox.Sdk.Config;
+using SharpDox.Sdk.Config.Attributes;
+using System.Xml;
+using System.IO;
 
 namespace SharpDox.Plugins.Chm
 {
+    [Name(typeof(ChmStrings), "ConfigTitle")]
     public class ChmConfig : IConfigSection
     {
         public event PropertyChangedEventHandler PropertyChanged;
@@ -27,6 +31,39 @@ namespace SharpDox.Plugins.Chm
         private string _syntaxBoxTextColor;
         private string _breadCrumBackgroundColor;
 
+        [Exclude]
+        [Name(typeof(ChmStrings), "CompilerPath")]
+        [ConfigEditor(EditorType.Folderpicker)]
+        public string CompilerPath
+        {
+            get 
+            {
+                var config = Helper.LoadConfig();
+                var compilerPath = config.SelectSingleNode("CompilerPath");
+                if (compilerPath != null)
+                {
+                    return compilerPath.InnerText;
+                }
+
+                return string.Empty;
+            }
+            set
+            {
+                var config = Helper.LoadConfig();
+                var compilerPath = config.SelectSingleNode("CompilerPath");
+                if (compilerPath == null)
+                {
+                    compilerPath = config.CreateNode(XmlNodeType.Entity, "CompilerPath", null);
+                }
+
+                compilerPath.InnerText = value;
+                config.Save(Path.Combine(Path.GetDirectoryName(GetType().Assembly.Location), "config.xml"));
+                OnPropertyChanged("CompilerPath");
+            }
+        }
+
+        [Name(typeof(ChmStrings), "BackgroundColor")]
+        [ConfigEditor(EditorType.Colorpicker)]
         public string BackgroundColor
         {
             get { return _backgroundColor ?? "#FFFFFF"; }
@@ -37,6 +74,8 @@ namespace SharpDox.Plugins.Chm
             }
         }
 
+        [Name(typeof(ChmStrings), "TextColor")]
+        [ConfigEditor(EditorType.Colorpicker)]
         public string TextColor
         {
             get { return _textColor ?? "#636363"; }
@@ -47,6 +86,8 @@ namespace SharpDox.Plugins.Chm
             }
         }
 
+        [Name(typeof(ChmStrings), "LinkColor")]
+        [ConfigEditor(EditorType.Colorpicker)]
         public string LinkColor
         {
             get { return _linkColor ?? "#1382CE"; }
@@ -57,6 +98,8 @@ namespace SharpDox.Plugins.Chm
             }
         }
 
+        [Name(typeof(ChmStrings), "LinkHoverColor")]
+        [ConfigEditor(EditorType.Colorpicker)]
         public string LinkHoverColor
         {
             get { return _linkHoverColor ?? "#F58026"; }
@@ -67,6 +110,8 @@ namespace SharpDox.Plugins.Chm
             }
         }
 
+        [Name(typeof(ChmStrings), "TableHeaderBackgroundColor")]
+        [ConfigEditor(EditorType.Colorpicker)]
         public string TableHeaderBackgroundColor
         {
             get { return _tableHeaderBackgroundColor ?? "#F6F5F1"; }
@@ -77,6 +122,8 @@ namespace SharpDox.Plugins.Chm
             }
         }
 
+        [Name(typeof(ChmStrings), "TableHeaderBorderColor")]
+        [ConfigEditor(EditorType.Colorpicker)]
         public string TableHeaderBorderColor
         {
             get { return _tableHeaderBorderColor ?? "#C2C2C2"; }
@@ -87,6 +134,8 @@ namespace SharpDox.Plugins.Chm
             }
         }
 
+        [Name(typeof(ChmStrings), "BreadCrumbBackgroundColor")]
+        [ConfigEditor(EditorType.Colorpicker)]
         public string BreadCrumbBackgroundColor
         {
             get { return _breadCrumBackgroundColor ?? "#EEEEEE"; }
@@ -97,6 +146,8 @@ namespace SharpDox.Plugins.Chm
             }
         }
 
+        [Name(typeof(ChmStrings), "BreadCrumbBorderColor")]
+        [ConfigEditor(EditorType.Colorpicker)]
         public string BreadCrumbBorderColor
         {
             get { return _breadCrumbBorderColor ?? "#B4A9AC"; }
@@ -107,6 +158,8 @@ namespace SharpDox.Plugins.Chm
             }
         }
 
+        [Name(typeof(ChmStrings), "BreadCrumbLinkColor")]
+        [ConfigEditor(EditorType.Colorpicker)]
         public string BreadCrumbLinkColor
         {
             get { return _breadCrumLinkColor ?? "#8C7F83"; }
@@ -117,6 +170,8 @@ namespace SharpDox.Plugins.Chm
             }
         }
 
+        [Name(typeof(ChmStrings), "BreadCrumbLinkHoverColor")]
+        [ConfigEditor(EditorType.Colorpicker)]
         public string BreadCrumbLinkHoverColor
         {
             get { return _breadCrumLinkHoverColor ?? "#574C4F"; }
@@ -127,6 +182,8 @@ namespace SharpDox.Plugins.Chm
             }
         }
 
+        [Name(typeof(ChmStrings), "SyntaxBoxBackgroundColor")]
+        [ConfigEditor(EditorType.Colorpicker)]
         public string SyntaxBoxBackgroundColor
         {
             get { return _syntaxBoxBackgroundColor ?? "#EEEEEE"; }
@@ -137,6 +194,8 @@ namespace SharpDox.Plugins.Chm
             }
         }
 
+        [Name(typeof(ChmStrings), "SyntaxBoxBorderColor")]
+        [ConfigEditor(EditorType.Colorpicker)]
         public string SyntaxBoxBorderColor
         {
             get { return _syntaxBoxBorderColor ?? "#CCCCCC"; }
@@ -147,6 +206,8 @@ namespace SharpDox.Plugins.Chm
             }
         }
 
+        [Name(typeof(ChmStrings), "SyntaxBoxTextColor")]
+        [ConfigEditor(EditorType.Colorpicker)]
         public string SyntaxBoxTextColor
         {
             get { return _syntaxBoxTextColor ?? "#636363"; }
