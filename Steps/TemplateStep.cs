@@ -202,7 +202,6 @@ namespace SharpDox.Plugins.Chm.Steps
                 {
                     _chmExporter.ExecuteOnStepMessage(string.Format("{0}: {1}", _chmExporter.ChmStrings.CreateType, sdType.Name));
 
-                    sdType.SortMembers();
                     var typeHtmlFile = Path.Combine(_chmExporter.TmpPath, sdType.Guid + ".html");
 
                     var template = new TypeTemplate
