@@ -3,17 +3,14 @@ using System.Collections.Generic;
 
 namespace SharpDox.Plugins.Chm.Steps
 {
-    internal class PreBuildStep : Step
+    internal class CopyStep : StepBase
     {
-        public override void ProcessStep(ChmExporter chmExporter)
+        public CopyStep(int progressStart, int progressEnd) : base(new StepRange(progressStart, progressEnd)) { }
+
+        public override void RunStep()
         {
-            chmExporter.ExecuteOnStepProgress(0);
-            chmExporter.ExecuteOnStepMessage(chmExporter.ChmStrings.Start);
-
             var contentPath = Path.Combine(Path.GetDirectoryName(GetType().Assembly.Location), "content");
-            CopyContentToTmp(chmExporter.Repository.Images, chmExporter.TmpPath, contentPath);
-
-            chmExporter.CurrentStep = new TemplateStep();
+            CopyContentToTmp(StepInput.SDProject.Images, StepInput.TmpPath, contentPath);
         }
 
         private void CopyContentToTmp(IEnumerable<string> images, string tmpFilepath, string contentPath)

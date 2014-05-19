@@ -3,7 +3,7 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="SharpDox.Plugins.Chm" #>
+<#@ import namespace="SharpDox.Plugins.Chm.Steps" #>
 
 /* layout */
 html, body{
@@ -21,9 +21,9 @@ html, body{
 
 #subheader{
 	display:block;
-	background: <#= ChmConfig.BreadCrumbBackgroundColor #>;
-	border-top: 1px solid <#= ChmConfig.BreadCrumbBorderColor #>;
-	border-bottom: 1px solid <#= ChmConfig.BreadCrumbBorderColor #>;
+	background: <#= StepInput.ChmConfig.BreadCrumbBackgroundColor #>;
+	border-top: 1px solid <#= StepInput.ChmConfig.BreadCrumbBorderColor #>;
+	border-bottom: 1px solid <#= StepInput.ChmConfig.BreadCrumbBorderColor #>;
 	padding: 2px 25px;
 	margin:0;
 	margin-top:5px;
@@ -33,12 +33,12 @@ html, body{
 #subheader a{
 	text-decoration:none;
 	font-weight:bold;
-	color: <#= ChmConfig.BreadCrumbLinkColor #>;
+	color: <#= StepInput.ChmConfig.BreadCrumbLinkColor #>;
 	font-size:12px;
 }
 
 #subheader a:hover{
-	color: <#= ChmConfig.BreadCrumbLinkHoverColor #>;
+	color: <#= StepInput.ChmConfig.BreadCrumbLinkHoverColor #>;
 }
 
 #content {
@@ -59,9 +59,9 @@ html, body{
 }
 
 .syntax-box {
-    background: none repeat scroll 0 0 <#= ChmConfig.SyntaxBoxBackgroundColor #>;
-    border: 1px solid <#= ChmConfig.SyntaxBoxBorderColor #>;
-	color: <#= ChmConfig.SyntaxBoxTextColor #>;
+    background: none repeat scroll 0 0 <#= StepInput.ChmConfig.SyntaxBoxBackgroundColor #>;
+    border: 1px solid <#= StepInput.ChmConfig.SyntaxBoxBorderColor #>;
+	color: <#= StepInput.ChmConfig.SyntaxBoxTextColor #>;
     padding: 5px;
 }
 
@@ -111,7 +111,7 @@ html, body{
 	}
 
 	th{
-		background: <#= ChmConfig.TableHeaderBackgroundColor #>;
+		background: <#= StepInput.ChmConfig.TableHeaderBackgroundColor #>;
 	}
 
 	.even{
@@ -127,14 +127,14 @@ html, body{
 	}
 
 	thead{
-		background: none repeat scroll 0 0 <#= ChmConfig.TableHeaderBackgroundColor #>;
+		background: none repeat scroll 0 0 <#= StepInput.ChmConfig.TableHeaderBackgroundColor #>;
 		font-family: "Segoe UI";
 		font-weight: bold;
 	}
 	
 	thead td{
-		border-bottom: 1px solid <#= ChmConfig.TableHeaderBorderColor #>;
-		border-top: 1px solid <#= ChmConfig.TableHeaderBorderColor #>;
+		border-bottom: 1px solid <#= StepInput.ChmConfig.TableHeaderBorderColor #>;
+		border-top: 1px solid <#= StepInput.ChmConfig.TableHeaderBorderColor #>;
 	}
 	
 	.icon-column {
@@ -152,13 +152,13 @@ html, body{
 /* #Typography
 ================================================== */
 	body {
-		background: <#= ChmConfig.BackgroundColor #>;
+		background: <#= StepInput.ChmConfig.BackgroundColor #>;
 		font: 14px/24px 'Segoe UI', 'Comic Sans MS';
-		color: <#= ChmConfig.TextColor #>;
+		color: <#= StepInput.ChmConfig.TextColor #>;
 	}
 	
 	h1, h2, h3, h4, h5, h6 {
-		color: <#= ChmConfig.TextColor #>;
+		color: <#= StepInput.ChmConfig.TextColor #>;
 		font: 60px/68px 'Segoe UI Light', 'Comic Sans MS';
 	}
 	h1 a, h2 a, h3 a, h4 a, h5 a, h6 a { font-weight: inherit; }
@@ -182,8 +182,8 @@ html, body{
 
 /* #Links
 ================================================== */
-	a, a:visited { color: <#= ChmConfig.LinkColor #>; text-decoration: none; outline: 0; }
-	a:hover, a:focus { color: <#= ChmConfig.LinkHoverColor #>; }
+	a, a:visited { color: <#= StepInput.ChmConfig.LinkColor #>; text-decoration: none; outline: 0; }
+	a:hover, a:focus { color: <#= StepInput.ChmConfig.LinkHoverColor #>; }
 	p a, p a:visited { line-height: inherit; }
 
 /* #Markdown
@@ -230,7 +230,3 @@ html, body{
 	.markdown pre p {
 	  margin: 0;
 	}
-
-<#+ 
-public ChmConfig ChmConfig { get; set; }
-#>

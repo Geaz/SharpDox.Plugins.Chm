@@ -5,6 +5,8 @@ using SharpDox.Sdk.Exporter;
 using SharpDox.Plugins.Chm.Templates.Strings;
 using SharpDox.Plugins.Chm.Steps;
 using System.IO;
+using SharpDox.Model;
+using System.Collections.Generic;
 
 namespace SharpDox.Plugins.Chm
 {
@@ -14,29 +16,40 @@ namespace SharpDox.Plugins.Chm
         public event Action<string> OnStepMessage;
         public event Action<int> OnStepProgress;
 
+        private double _docCount;
+        private double _docIndex;
+
+        private readonly ChmConfig _chmConfig;
+        private readonly ChmStrings _chmStrings;
+
         public ChmExporter(ChmConfig chmConfig, ChmStrings chmStrings)
         {
-            ChmConfig = chmConfig;
-            ChmStrings = chmStrings;
+            _chmConfig = chmConfig;
+            _chmStrings = chmStrings;
         }
 
-        public void Export(SDRepository repository, string outputPath)
+        public void Export(SDProject sdProject, string outputPath)
         {
-            foreach (var language in repository.DocumentationLanguages)
+            _docCount = sdProject.DocumentationLanguages.Count;
+            _docIndex = 1;
+            foreach (var docLanguage in sdProject.DocumentationLanguages)
             {
-                Repository = repository;
-                CurrentLanguage = language;
-                OutputPath = outputPath;
-                TmpPath = Path.Combine(outputPath, "tmp-" + CurrentLanguage);
-                CurrentStrings = GetCurrentStrings();
-                CurrentStep = new PreBuildStep();
+                StepInput.InitStepinput(sdProject, Path.Combine(outputPath, docLanguage), docLanguage, GetCurrentStrings(docLanguage, sdProject.DocLanguage), _chmStrings, _chmConfig);
 
-                while (CurrentStep != null)
+                var steps = new List<StepBase>();
+                steps.Add(new CopyStep(0, 10));
+                steps.Add(new TemplateStep(10, 50));
+                steps.Add(new CompileStep(50, 90));
+                steps.Add(new SaveAndCleanStep(90, 100));
+
+                foreach (var step in steps)
                 {
-                    CurrentStep.ProcessStep(this);
+                    step.OnStepMessage += ExecuteOnStepMessage;
+                    step.OnStepProgress += ExecuteOnStepProgress;
+                    step.RunStep();
                 }
 
-                ExecuteOnStepProgress(100);
+                _docIndex++;
             }
         }
 
@@ -47,16 +60,16 @@ namespace SharpDox.Plugins.Chm
             var requirements = compilerPath != null && !string.IsNullOrEmpty(compilerPath.InnerText) && File.Exists(Path.Combine(compilerPath.InnerText, "hhc.exe"));
             if (!requirements)
             {
-                ExecuteOnRequirementsWarning(ChmStrings.CompilerNotFound);
+                ExecuteOnRequirementsWarning(_chmStrings.CompilerNotFound);
             }
 
             return requirements;
         }
 
-        private IStrings GetCurrentStrings()
+        private IStrings GetCurrentStrings(string docLanguage, string defaultLanguage)
         {
             IStrings strings = new EnStrings();
-            if (CurrentLanguage == "de" || (CurrentLanguage == "default" && Repository.ProjectInfo.DocLanguage == "de"))
+            if (docLanguage == "de" || (docLanguage == "default" && defaultLanguage == "de"))
             {
                 strings = new DeStrings();
             }
@@ -68,7 +81,7 @@ namespace SharpDox.Plugins.Chm
             var handler = OnStepMessage;
             if (handler != null)
             {
-                handler(string.Format("({0}) - {1}", CurrentLanguage, message));
+                handler(string.Format("({0}) - {1}", StepInput.CurrentLanguage, message));
             }
         }
 
@@ -91,25 +104,5 @@ namespace SharpDox.Plugins.Chm
         }
 
         public string ExporterName { get { return "Chm"; } }
-
-        public string Author { get { return "Gerrit \"Geaz\" Gazic"; } }
-
-        public string Description { get { return ChmStrings.Description; } }
-
-        internal string OutputPath { get; private set; }
-
-        internal string TmpPath { get; private set; }
-
-        internal string CurrentLanguage { get; private set; }
-
-        internal SDRepository Repository { get; private set; }
-
-        internal ChmStrings ChmStrings { get; private set; }
-
-        internal ChmConfig ChmConfig { get; private set; }
-
-        internal IStrings CurrentStrings { get; private set; }
-
-        internal Step CurrentStep { get; set; }
     }
 }

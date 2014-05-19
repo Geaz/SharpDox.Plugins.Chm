@@ -13,8 +13,7 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
     using System.Text;
     using System.Collections.Generic;
     using SharpDox.Model.Repository;
-    using SharpDox.Plugins.Chm.Templates.Strings;
-    using SharpDox.Sdk.Config;
+    using SharpDox.Plugins.Chm.Steps;
     using MarkdownSharp;
     using System;
     
@@ -22,7 +21,7 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
+    #line 1 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class FieldsTemplate : FieldsTemplateBase
     {
@@ -32,16 +31,7 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
             this.Write(@"
-
 <html>
     <head>
         <title>Fields</title>
@@ -54,158 +44,131 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
 		<div id=""header"">
 			<h2 class=""type-title"">");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Strings.Fields));
+            #line 20 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(StepInput.DocStrings.Fields));
             
             #line default
             #line hidden
-            this.Write("</h2>\n\t\t\t<span class=\"namespace-title\">");
+            this.Write("</h2>\r\n\t\t\t<span class=\"namespace-title\">");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
+            #line 21 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SDType.Fullname));
             
             #line default
             #line hidden
-            this.Write("</span>\n\t\t</div>\n\t\t<div id=\"subheader\">\n\t\t\t<a href=\"");
+            this.Write("</span>\r\n\t\t</div>\r\n\t\t<div id=\"subheader\">\r\n\t\t\t<a href=\"");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProjectInfo.ProjectName.Replace(" ", "")));
+            #line 24 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(StepInput.SDProject.ProjectName.Replace(" ", "")));
             
             #line default
             #line hidden
             this.Write("-Index.html\">Start</a> > <a href=\"");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SDNamespace.Guid));
+            #line 24 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SDType.Namespace.Guid));
             
             #line default
             #line hidden
             this.Write(".html\">");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(SDNamespace.Fullname));
+            #line 24 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(SDType.Namespace.Fullname));
             
             #line default
             #line hidden
             this.Write("</a> > <a href=\"");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
+            #line 24 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SDType.Guid));
             
             #line default
             #line hidden
             this.Write(".html\">");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
+            #line 24 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SDType.Name));
             
             #line default
             #line hidden
-            this.Write("</a>\n\t\t</div>\n\n\t\t<div id=\"content\">\n\t\t\t<div class=\"table-box\">\n\t\t\t\t<table>\n\t\t\t\t\t<" +
-                    "thead>\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td></td>\n\t\t\t\t\t\t\t<td>");
+            this.Write("</a>\r\n\t\t</div>\r\n\r\n\t\t<div id=\"content\">\r\n\t\t\t<div class=\"table-box\">\r\n\t\t\t\t<table>\r\n" +
+                    "\t\t\t\t\t<thead>\r\n\t\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t\t<td></td>\r\n\t\t\t\t\t\t\t<td>");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Strings.Name));
-            
-            #line default
-            #line hidden
-            this.Write("</td>\n\t\t\t\t\t\t\t<td>");
-            
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(Strings.Description));
+            #line 33 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(StepInput.DocStrings.Name));
             
             #line default
             #line hidden
-            this.Write("</td>\n\t\t\t\t\t\t</tr>\n\t\t\t\t\t</thead>\n\t\t\t\t\t<tbody>\n\n\t\t\t\t\t");
+            this.Write("</td>\r\n\t\t\t\t\t\t\t<td>");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
+            #line 34 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(StepInput.DocStrings.Description));
+            
+            #line default
+            #line hidden
+            this.Write("</td>\r\n\t\t\t\t\t\t</tr>\r\n\t\t\t\t\t</thead>\r\n\t\t\t\t\t<tbody>\r\n\r\n\t\t\t\t\t");
+            
+            #line 39 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
  foreach(var field in SDType.Fields) { 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t\n\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t<td class=\"icon-column\">\n\t\t\t\t\t\t\t\t<img alt=\"Fields-Icon\" s" +
-                    "rc=\"icons/Field_");
+            this.Write("\t\t\t\t\r\n\t\t\t\t\t\t<tr>\r\n\t\t\t\t\t\t\t<td class=\"icon-column\">\r\n\t\t\t\t\t\t\t\t<img alt=\"Fields-Icon\"" +
+                    " src=\"icons/Field_");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
+            #line 43 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Accessibility));
             
             #line default
             #line hidden
-            this.Write(".png\">\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t\t<td>\n\t\t\t\t\t\t\t\t<a title=\"");
+            this.Write(".png\">\r\n\t\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t\t<td>\r\n\t\t\t\t\t\t\t\t<a title=\"");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
+            #line 46 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
             this.Write("\" href=\"");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
+            #line 46 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Guid));
             
             #line default
             #line hidden
             this.Write(".html\">");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
+            #line 46 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(field.Name));
             
             #line default
             #line hidden
-            this.Write("</a>\n\t\t\t\t\t\t\t</td>\t\n\t\t\t\t\t\t\t<td class=\"markdown\">\n\t\t\t\t\t\t\t\t");
+            this.Write("</a>\r\n\t\t\t\t\t\t\t</td>\t\r\n\t\t\t\t\t\t\t<td class=\"markdown\">\r\n\t\t\t\t\t\t\t\t");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
- if(field.Documentation.Count > 0 && field.Documentation.ContainsKey(CurrentLanguage)) { 
-            
-            #line default
-            #line hidden
-            this.Write("\n\t\t\t\t\t\t\t\t\t");
-            
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(new Markdown().Transform(field.Documentation[CurrentLanguage].Summary.ToString())));
+            #line 49 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
+ var language = field.Documentation.ContainsKey(StepInput.CurrentLanguage) ? StepInput.CurrentLanguage : "default"; 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t\t\t\t\t");
+            this.Write("\t\t\t\t\t\t\t\t");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
- } else if(field.Documentation.Count > 0) { 
-            
-            #line default
-            #line hidden
-            this.Write("\n\t\t\t\t\t\t\t\t\t");
-            
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(new Markdown().Transform(field.Documentation["default"].Summary.ToString())));
+            #line 50 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(field.Documentation.Count > 0 ? new Markdown().Transform(field.Documentation["default"].Summary.ToString()) : ""));
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t\t\t\t\t");
+            this.Write("\r\n\t\t\t\t\t\t\t</td>\r\n\t\t\t\t\t\t</tr>\r\n\r\n\t\t\t\t\t");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
+            #line 54 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t\t\t\t\t</td>\n\t\t\t\t\t\t</tr>\n\n\t\t\t\t\t");
-            
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
- } 
-            
-            #line default
-            #line hidden
-            this.Write("\n\n\t\t\t\t\t</tbody>\n\t\t\t\t</table>\n\t\t\t</div>\n\t\t</div>\n    </body>\n</html>\n\n");
+            this.Write("\r\n\t\t\t\t\t</tbody>\r\n\t\t\t\t</table>\r\n\t\t\t</div>\r\n\t\t</div>\r\n    </body>\r\n</html>\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\FieldsTemplate.tt"
- 
-public SDType SDType { get; set; } 
-public SDNamespace SDNamespace { get; set; }
-public SDProjectInfo ProjectInfo { get; set; }
-public string CurrentLanguage { get; set; }
-public IStrings Strings { get; set; }
-
+        #line 63 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\FieldsTemplate.tt"
+ public SDType SDType { get; set; } 
         
         #line default
         #line hidden

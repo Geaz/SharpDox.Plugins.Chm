@@ -3,11 +3,8 @@
 <#@ import namespace="System.Linq" #>
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
-<#@ import namespace="SharpDox.Model.Repository" #>
-<#@ import namespace="SharpDox.Model.Documentation" #>
-<#@ import namespace="SharpDox.Sdk.Config" #>
-<#@ import namespace="SharpDox.Plugins.Chm.Templates.Strings" #>
-<#@ import namespace="MarkdownSharp" #>
+<#@ import namespace="SharpDox.Plugins.Chm.Steps" #>
+<#@ import namespace="SharpDox.Model.Documentation.Article" #>
 
 <html>
     <head>
@@ -22,14 +19,9 @@
 			<h2 class="type-title"><#= SDArticle.Title #></h2>
 		</div>
 		<div id="subheader">
-			<a href="<#= ProjectInfo.ProjectName.Replace(" ", "") #>-Index.html">Start</a> > <a href="<#= Helper.RemoveIllegalCharacters(SDArticle.Title) #>.html"><#= SDArticle.Title #></a>
+			<a href="<#= StepInput.SDProject.ProjectName.Replace(" ", "") #>-Index.html">Start</a> > <a href="<#= Helper.RemoveIllegalCharacters(SDArticle.Title) #>.html"><#= SDArticle.Title #></a>
 		</div>
     </body>
 </html>
 
-<#+ 
-public SDArticle SDArticle { get; set; }
-public SDRepository SDRepository { get; set; }
-public SDProjectInfo ProjectInfo { get; set; }
-public IStrings Strings { get; set; }
- #>
+<#+ public SDArticle SDArticle { get; set; } #>

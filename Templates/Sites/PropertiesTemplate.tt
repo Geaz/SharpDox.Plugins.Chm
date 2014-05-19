@@ -4,13 +4,12 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="SharpDox.Model.Repository" #>
-<#@ import namespace="SharpDox.Plugins.Chm.Templates.Strings" #>
-<#@ import namespace="SharpDox.Sdk.Config" #>
+<#@ import namespace="SharpDox.Plugins.Chm.Steps" #>
 <#@ import namespace="MarkdownSharp" #>
 
 <html>
     <head>
-        <title>Properties</title>
+        <title><#= StepInput.DocStrings.Properties #></title>
         <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <link rel="stylesheet" type="text/css" href="css/reset.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -18,11 +17,11 @@
     </head>
     <body>
 		<div id="header">
-			<h2 class="type-title"><#= Strings.Properties #></h2>
+			<h2 class="type-title"><#= StepInput.DocStrings.Properties #></h2>
 			<span class="namespace-title"><#= SDType.Fullname #></span>
 		</div>
 		<div id="subheader">
-			<a href="<#= ProjectInfo.ProjectName.Replace(" ", "") #>-Index.html">Start</a> > <a href="<#= SDNamespace.Guid #>.html"><#= SDNamespace.Fullname #></a> > <a href="<#= SDType.Guid #>.html"><#= SDType.Name #></a>
+			<a href="<#= StepInput.SDProject.ProjectName.Replace(" ", "") #>-Index.html">Start</a> > <a href="<#= SDType.Namespace.Guid #>.html"><#= SDType.Namespace.Fullname #></a> > <a href="<#= SDType.Guid #>.html"><#= SDType.Name #></a>
 		</div>
 
 		<div id="content">
@@ -31,8 +30,8 @@
 					<thead>
 						<tr>
 							<td></td>
-							<td><#= Strings.Name #></td>
-							<td><#= Strings.Description #></td>
+							<td><#= StepInput.DocStrings.Name #></td>
+							<td><#= StepInput.DocStrings.Description #></td>
 						</tr>
 					</thead>
 					<tbody>
@@ -47,11 +46,8 @@
 								<a title="<#= property.Name #>" href="<#= property.Guid #>.html"><#= property.Name #></a>
 							</td>	
 							<td class="markdown">
-								<# if(property.Documentation.Count > 0 && property.Documentation.ContainsKey(CurrentLanguage)) { #>
-									<#= new Markdown().Transform(property.Documentation[CurrentLanguage].Summary.ToString()) #>
-								<# } else if(property.Documentation.Count > 0) { #>
-									<#= new Markdown().Transform(property.Documentation["default"].Summary.ToString()) #>
-								<# } #>
+								<# var language = property.Documentation.ContainsKey(StepInput.CurrentLanguage) ? StepInput.CurrentLanguage : "default"; #>
+								<#= property.Documentation.Count > 0 ? new Markdown().Transform(property.Documentation["default"].Summary.ToString()) : "" #>
 							</td>
 						</tr>
 
@@ -64,10 +60,4 @@
     </body>
 </html>
 
-<#+ 
-public SDType SDType { get; set; } 
-public SDNamespace SDNamespace { get; set; }
-public SDProjectInfo ProjectInfo { get; set; }
-public string CurrentLanguage { get; set; }
-public IStrings Strings { get; set; }
-#>
+<#+ public SDType SDType { get; set; } #>

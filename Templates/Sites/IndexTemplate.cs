@@ -12,16 +12,15 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
-    using SharpDox.Model.Repository;
-    using SharpDox.Sdk.Config;
     using MarkdownSharp;
+    using SharpDox.Plugins.Chm.Steps;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\IndexTemplate.tt"
+    #line 1 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\IndexTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class IndexTemplate : IndexTemplateBase
     {
@@ -31,17 +30,10 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n\n<html>\n    <head>\n        <title>");
+            this.Write("\r\n<html>\r\n    <head>\r\n        <title>");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\IndexTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProjectInfo.ProjectName));
+            #line 11 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\IndexTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(StepInput.SDProject.ProjectName));
             
             #line default
             #line hidden
@@ -56,50 +48,43 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
 		<div id=""header"">
 			<h2 class=""type-title"">");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\IndexTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProjectInfo.ProjectName));
+            #line 20 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\IndexTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(StepInput.SDProject.ProjectName));
             
             #line default
             #line hidden
-            this.Write("</h2>\n\t\t\t<span class=\"namespace-title\">by ");
+            this.Write("</h2>\r\n\t\t\t<span class=\"namespace-title\">by ");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\IndexTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(ProjectInfo.Author) ? ProjectInfo.Author : ""));
-            
-            #line default
-            #line hidden
-            this.Write("</span>\n\t\t</div>\n\t\t<div id=\"subheader\">\n\t\t\t<a href=\"");
-            
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\IndexTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProjectInfo.ProjectName.Replace(" ", "")));
+            #line 21 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\IndexTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(!string.IsNullOrEmpty(StepInput.SDProject.Author) ? StepInput.SDProject.Author : ""));
             
             #line default
             #line hidden
-            this.Write("-Index.html\">Start</a>\n\t\t</div>\n\t\t\n\t\t<div id=\"content\">\n\t\t\t<div class=\"markdown\">" +
-                    "\n\t\t\t\t");
+            this.Write("</span>\r\n\t\t</div>\r\n\t\t<div id=\"subheader\">\r\n\t\t\t<a href=\"");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\IndexTemplate.tt"
- var language = ProjectInfo.Description.ContainsKey(CurrentLanguage) ? CurrentLanguage : "default"; 
-            
-            #line default
-            #line hidden
-            this.Write("\n\t\t\t\t");
-            
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\IndexTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProjectInfo.Description != null ? new Markdown().Transform(ProjectInfo.Description[language]) : ""));
+            #line 24 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\IndexTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(StepInput.SDProject.ProjectName.Replace(" ", "")));
             
             #line default
             #line hidden
-            this.Write("\n\t\t\t</div>\n\t\t</div>\n    </body>\n</html>\n\n");
+            this.Write("-Index.html\">Start</a>\r\n\t\t</div>\r\n\t\t\r\n\t\t<div id=\"content\">\r\n\t\t\t<div class=\"markdo" +
+                    "wn\">\r\n\t\t\t\t");
+            
+            #line 29 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\IndexTemplate.tt"
+ var language = StepInput.SDProject.Description.ContainsKey(StepInput.CurrentLanguage) ? StepInput.CurrentLanguage : "default"; 
+            
+            #line default
+            #line hidden
+            this.Write("\t\t\t\t");
+            
+            #line 30 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\IndexTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(StepInput.SDProject.Description != null ? new Markdown().Transform(StepInput.SDProject.Description[language]) : ""));
+            
+            #line default
+            #line hidden
+            this.Write("\r\n\t\t\t</div>\r\n\t\t</div>\r\n    </body>\r\n</html>");
             return this.GenerationEnvironment.ToString();
         }
-        
-        #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\IndexTemplate.tt"
- public SDProjectInfo ProjectInfo { get; set; } 
-	public string CurrentLanguage { get; set; } 
-        
-        #line default
-        #line hidden
     }
     
     #line default

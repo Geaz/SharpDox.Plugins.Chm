@@ -4,8 +4,7 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="SharpDox.Model.Repository" #>
-<#@ import namespace="SharpDox.Plugins.Chm.Templates.Strings" #>
-<#@ import namespace="SharpDox.Sdk.Config" #>
+<#@ import namespace="SharpDox.Plugins.Chm.Steps" #>
 <#@ import namespace="SharpDox.Sdk" #>
 <#@ import namespace="MarkdownSharp" #>
 
@@ -23,17 +22,17 @@
 			<span class="namespace-title">Assembly: <#= SDNamespace.Assemblyname #></span>
 		</div>
 		<div id="subheader">
-			<a href="<#= ProjectInfo.ProjectName.Replace(" ", "") #>-Index.html">Start</a> > <a href="<#= SDNamespace.Guid #>.html"><#= SDNamespace.Fullname #></a>
+			<a href="<#= StepInput.SDProject.ProjectName.Replace(" ", "") #>-Index.html">Start</a> > <a href="<#= SDNamespace.Guid #>.html"><#= SDNamespace.Fullname #></a>
 		</div>
 
 		<div id="content">
-			<# var language = SDNamespace.Description.ContainsKey(CurrentLanguage) ? CurrentLanguage : "default";
+			<# var language = SDNamespace.Description.ContainsKey(StepInput.CurrentLanguage) ? StepInput.CurrentLanguage : "default";
 			if(SDNamespace.Description.Count > 0) { #>
-				<h3 class="box-title"><#= Strings.Description #></h3>
+				<h3 class="box-title"><#= StepInput.DocStrings.Description #></h3>
 				<div class="text-box markdown description">
 					<#	if(SDNamespace.Description != null)
 						{
-							var template = new Templater(SDRepository, SDNamespace.Description[language].ToString()); 
+							var template = new Templater(StepInput.SDProject, SDNamespace.Description[language].ToString()); 
 							var namespaceDescription = template.TransformText(Helper.TransformLinkToken); #>
 
 							<#= new Markdown().Transform(namespaceDescription) #>
@@ -41,21 +40,21 @@
 				</div>
 			<# } #>
 
-			<h2 class="box-title"><#= Strings.Types #></h2>
+			<h2 class="box-title"><#= StepInput.DocStrings.Types #></h2>
 			<div class="table-box">
 				<table>
 					<thead>
 						<tr>
 							<td></td>
-							<td><#= Strings.Name #></td>
-							<td><#= Strings.Description #></td>
+							<td><#= StepInput.DocStrings.Name #></td>
+							<td><#= StepInput.DocStrings.Description #></td>
 						</tr>
 					</thead>
 					<tbody>
 
 					<# foreach(var type in SDNamespace.Types) { 
-						var sdType = (SDType)SDRepository.GetTypeByIdentifier(type.Identifier); 						
-						var typeLanguage = sdType.Documentation.ContainsKey(CurrentLanguage) ? CurrentLanguage : "default"; #>
+						var sdType = (SDType)StepInput.SDProject.GetTypeByIdentifier(type.Identifier); 						
+						var typeLanguage = sdType.Documentation.ContainsKey(StepInput.CurrentLanguage) ? StepInput.CurrentLanguage : "default"; #>
 
 						<tr>
 							<td class="icon-column">
@@ -78,7 +77,7 @@
 			</div>
 
 			<# if(SDNamespace.Uses.Count > 0) { #>
-				<h3 class="box-title"><#= Strings.Uses #></h3>
+				<h3 class="box-title"><#= StepInput.DocStrings.Uses #></h3>
 				<div class="list-box">
 					<ul>
 					<# foreach(var use in SDNamespace.Uses) { #>
@@ -89,7 +88,7 @@
 			<# } #>
 
 			<# if(SDNamespace.UsedBy.Count > 0) { #>
-				<h3 class="box-title"><#= Strings.UsedBy #></h3>
+				<h3 class="box-title"><#= StepInput.DocStrings.UsedBy #></h3>
 				<div class="list-box">
 					<ul>
 					<# foreach(var used in SDNamespace.UsedBy) { #>
@@ -103,10 +102,4 @@
     </body>
 </html>
 
-<#+ 
-public SDNamespace SDNamespace { get; set; }
-public SDRepository SDRepository { get; set; }
-public SDProjectInfo ProjectInfo { get; set; }
-public string CurrentLanguage { get; set; }
-public IStrings Strings { get; set; }
- #>
+<#+ public SDNamespace SDNamespace { get; set; } #>

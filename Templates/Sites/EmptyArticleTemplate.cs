@@ -12,18 +12,15 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
     using System.Linq;
     using System.Text;
     using System.Collections.Generic;
-    using SharpDox.Model.Repository;
-    using SharpDox.Model.Documentation;
-    using SharpDox.Sdk.Config;
-    using SharpDox.Plugins.Chm.Templates.Strings;
-    using MarkdownSharp;
+    using SharpDox.Plugins.Chm.Steps;
+    using SharpDox.Model.Documentation.Article;
     using System;
     
     /// <summary>
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\EmptyArticleTemplate.tt"
+    #line 1 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\EmptyArticleTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class EmptyArticleTemplate : EmptyArticleTemplateBase
     {
@@ -33,18 +30,9 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n");
-            this.Write("\n\n<html>\n    <head>\n        <title>");
+            this.Write("\r\n<html>\r\n    <head>\r\n        <title>");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\EmptyArticleTemplate.tt"
+            #line 11 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\EmptyArticleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SDArticle.Title));
             
             #line default
@@ -59,43 +47,38 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
 		<div id=""header"">
 			<h2 class=""type-title"">");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\EmptyArticleTemplate.tt"
+            #line 19 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\EmptyArticleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SDArticle.Title));
             
             #line default
             #line hidden
-            this.Write("</h2>\n\t\t</div>\n\t\t<div id=\"subheader\">\n\t\t\t<a href=\"");
+            this.Write("</h2>\r\n\t\t</div>\r\n\t\t<div id=\"subheader\">\r\n\t\t\t<a href=\"");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\EmptyArticleTemplate.tt"
-            this.Write(this.ToStringHelper.ToStringWithCulture(ProjectInfo.ProjectName.Replace(" ", "")));
+            #line 22 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\EmptyArticleTemplate.tt"
+            this.Write(this.ToStringHelper.ToStringWithCulture(StepInput.SDProject.ProjectName.Replace(" ", "")));
             
             #line default
             #line hidden
             this.Write("-Index.html\">Start</a> > <a href=\"");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\EmptyArticleTemplate.tt"
+            #line 22 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\EmptyArticleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Helper.RemoveIllegalCharacters(SDArticle.Title)));
             
             #line default
             #line hidden
             this.Write(".html\">");
             
-            #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\EmptyArticleTemplate.tt"
+            #line 22 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\EmptyArticleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SDArticle.Title));
             
             #line default
             #line hidden
-            this.Write("</a>\n\t\t</div>\n    </body>\n</html>\n\n");
+            this.Write("</a>\r\n\t\t</div>\r\n    </body>\r\n</html>\r\n\r\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 1 "C:\Users\ZP620933\Downloads\sharpDox-dev\Plugins\ChmExporter\Templates\Sites\EmptyArticleTemplate.tt"
- 
-public SDArticle SDArticle { get; set; }
-public SDRepository SDRepository { get; set; }
-public SDProjectInfo ProjectInfo { get; set; }
-public IStrings Strings { get; set; }
- 
+        #line 27 "D:\Github\SharpDox.Plugins.Chm\Templates\Sites\EmptyArticleTemplate.tt"
+ public SDArticle SDArticle { get; set; } 
         
         #line default
         #line hidden
