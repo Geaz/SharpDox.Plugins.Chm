@@ -17,6 +17,8 @@ namespace SharpDox.Plugins.Chm.Steps
         {
             try
             {
+                ExecuteOnStepMessage(StepInput.ChmStrings.Saving);
+
                 var copyTo = Path.Combine(path, StepInput.SDProject.ProjectName + "-" + StepInput.CurrentLanguage + ".chm");
                 if (appenderNumber > 0)
                 {
@@ -33,6 +35,7 @@ namespace SharpDox.Plugins.Chm.Steps
 
         private void CleanUp()
         {
+            ExecuteOnStepMessage(StepInput.ChmStrings.Cleaning);
             Directory.Delete(StepInput.TmpPath, true);
         }
     }

@@ -31,7 +31,7 @@ namespace SharpDox.Plugins.Chm
         public void Export(SDProject sdProject, string outputPath)
         {
             _docCount = sdProject.DocumentationLanguages.Count;
-            _docIndex = 1;
+            _docIndex = 0;
             foreach (var docLanguage in sdProject.DocumentationLanguages)
             {
                 StepInput.InitStepinput(sdProject, Path.Combine(outputPath, docLanguage), docLanguage, GetCurrentStrings(docLanguage, sdProject.DocLanguage), _chmStrings, _chmConfig);
@@ -44,6 +44,8 @@ namespace SharpDox.Plugins.Chm
 
                 foreach (var step in steps)
                 {
+                    ExecuteOnStepProgress(step.StepRange.ProgressStart);
+
                     step.OnStepMessage += ExecuteOnStepMessage;
                     step.OnStepProgress += ExecuteOnStepProgress;
                     step.RunStep();
@@ -90,7 +92,7 @@ namespace SharpDox.Plugins.Chm
             var handler = OnStepProgress;
             if (handler != null)
             {
-                handler(progress);
+                handler((int)((progress / _docCount) + (100 / _docCount * _docIndex)));
             }
         }
 

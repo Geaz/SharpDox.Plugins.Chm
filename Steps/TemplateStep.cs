@@ -26,6 +26,7 @@ namespace SharpDox.Plugins.Chm.Steps
 
         private void CreateStylesheet()
         {
+            ExecuteOnStepMessage(StepInput.ChmStrings.CreateStylesheet);
             var styleSheetFile = Path.Combine(StepInput.TmpPath, "css", "style.css");
             var template = new StylesheetTemplate();
             File.WriteAllText(styleSheetFile, template.TransformText());
@@ -33,6 +34,7 @@ namespace SharpDox.Plugins.Chm.Steps
 
         private void CreateTocFile()
         {
+            ExecuteOnStepMessage(StepInput.ChmStrings.CreateToc);
             var tocHtmlFile = Path.Combine(StepInput.TmpPath, StepInput.SDProject.ProjectName.Replace(" ", "") + ".hhc");
             var template = new HhcTemplate();
             File.WriteAllText(tocHtmlFile, template.TransformText());
@@ -40,6 +42,7 @@ namespace SharpDox.Plugins.Chm.Steps
 
         private void CreateProjectFile()
         {
+            ExecuteOnStepMessage(StepInput.ChmStrings.CreateProject);
             var projectFile = Path.Combine(StepInput.TmpPath, StepInput.SDProject.ProjectName.Replace(" ", "") + ".hhp");
             var template = new HhpTemplate();
             File.WriteAllText(projectFile, template.TransformText());
@@ -47,6 +50,7 @@ namespace SharpDox.Plugins.Chm.Steps
 
         private void CreateArticleFiles()
         {
+            ExecuteOnStepMessage(StepInput.ChmStrings.CreateArticles);
             if (StepInput.SDProject.Articles.Count > 0)
             {
                 var articles = StepInput.SDProject.Articles.ContainsKey(StepInput.CurrentLanguage) ?
@@ -79,6 +83,7 @@ namespace SharpDox.Plugins.Chm.Steps
 
         private void CreateIndexFile()
         {
+            ExecuteOnStepMessage(StepInput.ChmStrings.CreateIndex);
             var indexHtmlFile = Path.Combine(StepInput.TmpPath, StepInput.SDProject.ProjectName.Replace(" ", "") + "-Index.html");
             var template = new IndexTemplate();
             File.WriteAllText(indexHtmlFile, template.TransformText());

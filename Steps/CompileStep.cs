@@ -9,6 +9,8 @@ namespace SharpDox.Plugins.Chm.Steps
 
         public override void RunStep()
         {
+            ExecuteOnStepMessage(StepInput.ChmStrings.Compiling);
+
             var config = Helper.LoadConfig();
             var compilerPath = config.SelectSingleNode("CompilerPath").InnerText;
 

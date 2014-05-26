@@ -1,4 +1,3 @@
-Start = Starte CHM-Exporter
 CreateStylesheet = Creating stylesheet
 CreateIndex = Erstelle Index
 CreateToc = Erstelle TOC
@@ -25,6 +24,5 @@ SyntaxBoxBorderColor = Syntaxbox-Rahmenfarbe
 SyntaxBoxTextColor = Syntaxbox-Textfarbe
 CreateIndexFilesFor = Erstelle Indexdatei für
 CreateType = Erstelle Typ
-Description = Dieser Exporter erstellt eine Windows Helpfile (chm). Es werden mehrsprachige Dokumentationen, Artikel und Namensraum-Beschreibungen unterstützt.
 CompilerNotFound = Der CHM-Compiler konnte nicht gefunden werden. Bitte setze den korrekten Pfad in den CHM-Einstellungen.
 CompilerPath = Pfad zum CHM-Compiler

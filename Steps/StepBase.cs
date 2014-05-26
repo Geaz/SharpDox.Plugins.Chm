@@ -26,7 +26,7 @@ namespace SharpDox.Plugins.Chm.Steps
         {
             if (OnStepProgress != null)
             {
-                OnStepProgress(value);
+                OnStepProgress(StepRange.GetProgressByStepProgress(value));
             }
         }
 
