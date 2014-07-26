@@ -1,0 +1,35 @@
+﻿<#@ template language="C#" #>
+<#@ assembly name="System.Core" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ import namespace="SharpDox.Plugins.Chm.Steps" #>
+<#@ import namespace="SharpDox.Model.Documentation.Article" #>
+<#@ import namespace="SharpDox.Sdk" #>
+<#@ import namespace="MarkdownSharp" #>
+
+<html>
+    <head>
+        <title><#= SDArticle.Title #></title>
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <link rel="stylesheet" type="text/css" href="css/reset.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+    </head>
+    <body>     
+		<div id="header">
+			<h2 class="type-title"><#= SDArticle.Title #></h2>
+		</div>
+		<div id="subheader">
+			<a href="<#= StepInput.SDProject.ProjectName.Replace(" ", "") #>-Index.html">Start</a> > <a href="<#= Helper.RemoveIllegalCharacters(SDArticle.Title.Replace(" ", "_")) #>.html"><#= SDArticle.Title #></a>
+		</div>
+
+		<div id="content">
+			<h3 class="box-title"><#= StepInput.DocStrings.Article #></h3>
+			<div class="text-box markdown description">
+				<#= new Markdown().Transform(SDArticle.Content.Transform(Helper.TransformLinkToken)) #>
+			</div>
+		</div>
+    </body>
+</html>
+
+<#+ public SDArticle SDArticle { get; set; } #>

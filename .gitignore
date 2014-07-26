@@ -6,7 +6,11 @@
 *.user
 *.sln.docstates
 packages/*
+node_modules/*
+src/packages/*
+
 !packages/repositories.config
+!src/packages/repositories.config
 
 # Build results
 
@@ -15,6 +19,9 @@ packages/*
 x64/
 [Bb]in/
 [Oo]bj/
+
+build/
+!src/SharpDox.Sdk/Build/
 
 # Enable "build/" folder in the NuGet Packages folder since NuGet packages use it for MSBuild targets
 !packages/*/build/
