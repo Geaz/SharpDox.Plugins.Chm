@@ -7,7 +7,6 @@
 <#@ import namespace="SharpDox.Plugins.Chm.Steps" #>
 <#@ import namespace="SharpDox.Model.Repository" #>
 <#@ import namespace="SharpDox.Model.Documentation.Article" #>
-<#@ import namespace="SharpDox.Plugins.Chm.Templates.Strings" #>
 <#@ import namespace="SharpDox.Sdk.Config" #>
 
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">

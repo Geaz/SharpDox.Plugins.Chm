@@ -34,6 +34,30 @@ namespace SharpDox.Plugins.Chm
         private string _compilerNotFound = "Could not find the chm compiler. Please set the correct path in the chm settings.";
         private string _compilerPath = "Path to chm compiler";
 
+        private string _constructors = "Contructors";
+        private string _fields = "Fields";
+        private string _properties = "Properties";
+        private string _methods = "Methods";
+        private string _events = "Events";
+        private string _name = "Name";
+        private string _description = "Description";
+        private string _seeAlso = "See also";
+        private string _syntax = "Syntax";
+        private string _summary = "Summary";
+        private string _remarks = "Remarks";
+        private string _example = "Example";
+        private string _returns = "Returns";
+        private string _exceptions = "Exceptions";
+        private string _parameters = "Parameters";
+        private string _typeParameters = "Type Parameters";
+        private string _types = "Types";
+        private string _uses = "Uses";
+        private string _usedBy = "Used By";
+        private string _basetype = "Base Type";
+        private string _implements = "Implements";
+        private string _article = "Article";
+        private string _members = "Members";
+
         public string DisplayName { get { return "ChmExporter"; } }
 
         public string ConfigTitle
@@ -208,6 +232,143 @@ namespace SharpDox.Plugins.Chm
         {
             get { return _compilerPath; }
             set { _compilerPath = value; }
+        }
+
+        public string Constructors
+        {
+            get { return _constructors; }
+            set { _constructors = value; }
+        }
+
+        public string Fields
+        {
+            get { return _fields; }
+            set { _fields = value; }
+        }
+        public string Properties
+        {
+            get { return _properties; }
+            set { _properties = value; }
+        }
+
+        public string Methods
+        {
+            get { return _methods; }
+            set { _methods = value; }
+        }
+
+        public string Events
+        {
+            get { return _events; }
+            set { _events = value; }
+        }
+
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+
+        public string Description
+        {
+            get { return _description; }
+            set { _description = value; }
+        }
+
+        public string SeeAlso
+        {
+            get { return _seeAlso; }
+            set { _seeAlso = value; }
+        }
+
+        public string Syntax
+        {
+            get { return _syntax; }
+            set { _syntax = value; }
+        }
+
+        public string Summary
+        {
+            get { return _summary; }
+            set { _summary = value; }
+        }
+
+        public string Remarks
+        {
+            get { return _remarks; }
+            set { _remarks = value; }
+        }
+
+        public string Example
+        {
+            get { return _example; }
+            set { _example = value; }
+        }
+
+        public string Returns
+        {
+            get { return _returns; }
+            set { _returns = value; }
+        }
+
+        public string Exceptions
+        {
+            get { return _exceptions; }
+            set { _exceptions = value; }
+        }
+
+        public string Parameters
+        {
+            get { return _parameters; }
+            set { _parameters = value; }
+        }
+
+        public string TypeParameters
+        {
+            get { return _typeParameters; }
+            set { _typeParameters = value; }
+        }
+
+        public string Types
+        {
+            get { return _types; }
+            set { _types = value; }
+        }
+
+        public string Uses
+        {
+            get { return _uses; }
+            set { _uses = value; }
+        }
+
+        public string UsedBy
+        {
+            get { return _usedBy; }
+            set { _usedBy = value; }
+        }
+
+        public string Basetype
+        {
+            get { return _basetype; }
+            set { _basetype = value; }
+        }
+
+        public string Implements
+        {
+            get { return _implements; }
+            set { _implements = value; }
+        }
+
+        public string Article
+        {
+            get { return _article; }
+            set { _article = value; }
+        }
+
+        public string Members
+        {
+            get { return _members; }
+            set { _members = value; }
         }
     }
 }

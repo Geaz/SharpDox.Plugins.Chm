@@ -157,9 +157,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TypeTemplate.tt</DependentUpon>
     </Compile>
-    <Compile Include="Templates\Strings\DeStrings.cs" />
-    <Compile Include="Templates\Strings\EnStrings.cs" />
-    <Compile Include="Templates\Strings\IStrings.cs" />
     <Compile Include="Templates\StylesheetTemplate.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

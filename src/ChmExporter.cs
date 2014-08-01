@@ -2,11 +2,11 @@
 using System.Xml;
 using SharpDox.Model.Repository;
 using SharpDox.Sdk.Exporter;
-using SharpDox.Plugins.Chm.Templates.Strings;
 using SharpDox.Plugins.Chm.Steps;
 using System.IO;
 using SharpDox.Model;
 using System.Collections.Generic;
+using SharpDox.Sdk.Local;
 
 namespace SharpDox.Plugins.Chm
 {
@@ -19,13 +19,15 @@ namespace SharpDox.Plugins.Chm
         private double _docCount;
         private double _docIndex;
 
+        private readonly ILocalController _localController;
         private readonly ChmConfig _chmConfig;
         private readonly ChmStrings _chmStrings;
 
-        public ChmExporter(ChmConfig chmConfig, ChmStrings chmStrings)
+        public ChmExporter(ChmConfig chmConfig, ILocalController localController)
         {
             _chmConfig = chmConfig;
-            _chmStrings = chmStrings;
+            _localController = localController;
+            _chmStrings = localController.GetLocalStrings<ChmStrings>();
         }
 
         public void Export(SDProject sdProject, string outputPath)
@@ -34,7 +36,7 @@ namespace SharpDox.Plugins.Chm
             _docIndex = 0;
             foreach (var docLanguage in sdProject.DocumentationLanguages)
             {
-                StepInput.InitStepinput(sdProject, Path.Combine(outputPath, docLanguage), docLanguage, GetCurrentStrings(docLanguage, sdProject.DocLanguage), _chmStrings, _chmConfig);
+                StepInput.InitStepinput(sdProject, Path.Combine(outputPath, docLanguage), docLanguage, _localController.GetLocalStringsOrDefault<ChmStrings>(docLanguage), _chmStrings, _chmConfig);
 
                 var steps = new List<StepBase>();
                 steps.Add(new CopyStep(0, 10));
@@ -66,16 +68,6 @@ namespace SharpDox.Plugins.Chm
             }
 
             return requirements;
-        }
-
-        private IStrings GetCurrentStrings(string docLanguage, string defaultLanguage)
-        {
-            IStrings strings = new EnStrings();
-            if (docLanguage == "de" || (docLanguage == "default" && defaultLanguage == "de"))
-            {
-                strings = new DeStrings();
-            }
-            return strings;
         }
 
         internal void ExecuteOnStepMessage(string message)

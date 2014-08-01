@@ -16,7 +16,6 @@ namespace SharpDox.Plugins.Chm.Templates.Nav
     using SharpDox.Plugins.Chm.Steps;
     using SharpDox.Model.Repository;
     using SharpDox.Model.Documentation.Article;
-    using SharpDox.Plugins.Chm.Templates.Strings;
     using SharpDox.Sdk.Config;
     using System;
     
@@ -24,7 +23,7 @@ namespace SharpDox.Plugins.Chm.Templates.Nav
     /// Class to produce the template output
     /// </summary>
     
-    #line 1 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+    #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.TextTemplating", "12.0.0.0")]
     public partial class HhcTemplate : HhcTemplateBase
     {
@@ -34,25 +33,34 @@ namespace SharpDox.Plugins.Chm.Templates.Nav
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\n<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\r\n<HTML>\r\n\t<HEAD>\r\n\t\t<meta name=\"" +
-                    "GENERATOR\" content=\"sharpDox\">\r\n\t</HEAD>\r\n\t<BODY>\r\n\t\t<ul>\r\n\t\t<li> <object type=\"" +
-                    "text/sitemap\">\r\n\t\t\t\t\t\t<param name=\"Name\" value=\"");
+            this.Write("\n");
+            this.Write("\n");
+            this.Write("\n");
+            this.Write("\n");
+            this.Write("\n");
+            this.Write("\n");
+            this.Write("\n");
+            this.Write("\n");
+            this.Write("\n");
+            this.Write("\n\n<!DOCTYPE HTML PUBLIC \"-//IETF//DTD HTML//EN\">\n<HTML>\n\t<HEAD>\n\t\t<meta name=\"GEN" +
+                    "ERATOR\" content=\"sharpDox\">\n\t</HEAD>\n\t<BODY>\n\t\t<ul>\n\t\t<li> <object type=\"text/si" +
+                    "temap\">\n\t\t\t\t\t\t<param name=\"Name\" value=\"");
             
-            #line 21 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+            #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(StepInput.SDProject.ProjectName));
             
             #line default
             #line hidden
-            this.Write("\">\r\n\t\t\t\t\t\t<param name=\"Local\" value=\"");
+            this.Write("\">\n\t\t\t\t\t\t<param name=\"Local\" value=\"");
             
-            #line 22 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+            #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(StepInput.SDProject.ProjectName.Replace(" ", "")));
             
             #line default
             #line hidden
-            this.Write("-Index.html\">\r\n\t\t\t\t\t</object>\r\n\r\n\t\t\t<ul>\r\n\t\t\t\t");
+            this.Write("-Index.html\">\n\t\t\t\t\t</object>\n\n\t\t\t<ul>\n\t\t\t\t");
             
-            #line 26 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+            #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
  if(StepInput.SDProject.Articles.Count > 0) {
 					var articles = StepInput.SDProject.Articles.ContainsKey(StepInput.CurrentLanguage) ? StepInput.SDProject.Articles[StepInput.CurrentLanguage] : StepInput.SDProject.Articles["default"];
 					foreach (var article in articles)
@@ -60,96 +68,96 @@ namespace SharpDox.Plugins.Chm.Templates.Nav
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t<li> <object type=\"text/sitemap\">\r\n\t\t\t\t\t\t\t\t\t<param name=\"Name\" value=\"");
+            this.Write("\n\t\t\t\t\t\t<li> <object type=\"text/sitemap\">\n\t\t\t\t\t\t\t\t\t<param name=\"Name\" value=\"");
             
-            #line 31 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+            #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(WebUtility.HtmlEncode(article.Title)));
             
             #line default
             #line hidden
-            this.Write("\">\r\n\t\t\t\t\t\t\t\t\t<param name=\"Local\" value=\"");
+            this.Write("\">\n\t\t\t\t\t\t\t\t\t<param name=\"Local\" value=\"");
             
-            #line 32 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+            #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Helper.RemoveIllegalCharacters(article.Title.Replace(" ", "_"))));
             
             #line default
             #line hidden
-            this.Write(".html\">\r\n\t\t\t\t\t\t\t</object>\r\n\r\n\t\t\t\t\t\t");
+            this.Write(".html\">\n\t\t\t\t\t\t\t</object>\n\n\t\t\t\t\t\t");
             
-            #line 35 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+            #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
  if (article is SDDocPlaceholder)
 						{ 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t\t");
+            this.Write("\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t");
             
-            #line 38 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+            #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
  var apiNavTemplate = new ApiNavTemplate { SDRepository = StepInput.SDProject.Repositories[((SDDocPlaceholder)article).SolutionFile] }; 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t\t\t");
+            this.Write("\n\t\t\t\t\t\t\t\t");
             
-            #line 39 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+            #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(apiNavTemplate.TransformText()));
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t</li>\r\n\t\t\t\t\t\t");
+            this.Write("\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t</li>\n\t\t\t\t\t\t");
             
-            #line 42 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+            #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
  }
 						else if(article.Children.Count > 0)
 						{ 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t\t\t");
+            this.Write("\n\t\t\t\t\t\t\t\t<ul>\n\t\t\t\t\t\t\t\t");
             
-            #line 46 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+            #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
  var articleNavTemplate = new ArticleNavTemplate { Articles = article.Children }; 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t\t\t\t");
+            this.Write("\n\t\t\t\t\t\t\t\t");
             
-            #line 47 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+            #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(articleNavTemplate.TransformText()));
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t\t\t\t\t\t</ul>\r\n\t\t\t\t\t\t\t\r\n\t\t\t\t\t\t");
+            this.Write("\n\t\t\t\t\t\t\t\t</ul>\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t");
             
-            #line 50 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+            #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t\t\t\t</li>\r\n\t\t\t\t");
+            this.Write("\n\n\t\t\t\t\t\t</li>\n\t\t\t\t");
             
-            #line 53 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+            #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
 	}
 				} else {
 					var apiNavTemplate = new ApiNavTemplate { SDRepository = StepInput.SDProject.Repositories.Single().Value }; 
             
             #line default
             #line hidden
-            this.Write("\t\t\t\t\t");
+            this.Write("\n\t\t\t\t\t");
             
-            #line 56 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+            #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(apiNavTemplate.TransformText()));
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t\t");
+            this.Write("\n\t\t\t\t");
             
-            #line 57 "D:\Github\SharpDox.Plugins.Chm\Templates\Nav\HhcTemplate.tt"
+            #line 1 "C:\Users\ZP620933\Downloads\SharpDox.Plugins.Chm-dev\src\Templates\Nav\HhcTemplate.tt"
  } 
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t</ul>\r\n\t\t</li>\r\n\t\t</ul>\r\n\t</BODY>\r\n</HTML>");
+            this.Write("\n\n\t\t\t</ul>\n\t\t</li>\n\t\t</ul>\n\t</BODY>\n</HTML>");
             return this.GenerationEnvironment.ToString();
         }
     }

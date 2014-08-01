@@ -4,7 +4,6 @@
 <#@ import namespace="System.Text" #>
 <#@ import namespace="System.Collections.Generic" #>
 <#@ import namespace="SharpDox.Model.Repository" #>
-<#@ import namespace="SharpDox.Plugins.Chm.Templates.Strings" #>
 <#@ import namespace="SharpDox.Sdk.Config" #>
 <#@ import namespace="SharpDox.Plugins.Chm.Steps" #>
 <#@ import namespace="MarkdownSharp" #>
