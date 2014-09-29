@@ -32,9 +32,17 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
         /// </summary>
         public virtual string TransformText()
         {
-            this.Write("\r\n<html>\r\n    <head>\r\n        <title>");
+            this.Write("\n");
+            this.Write("\n");
+            this.Write("\n");
+            this.Write("\n");
+            this.Write("\n");
+            this.Write("\n");
+            this.Write("\n");
+            this.Write("\n");
+            this.Write("\n\n<html>\n    <head>\n        <title>");
             
-            #line 13 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
+            #line 1 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SDArticle.Title));
             
             #line default
@@ -48,51 +56,65 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
 		<div id=""header"">
 			<h2 class=""type-title"">");
             
-            #line 20 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
+            #line 1 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SDArticle.Title));
             
             #line default
             #line hidden
-            this.Write("</h2>\r\n\t\t</div>\r\n\t\t<div id=\"subheader\">\r\n\t\t\t<a href=\"");
+            this.Write("</h2>\n\t\t</div>\n\t\t<div id=\"subheader\">\n\t\t\t<a href=\"");
             
-            #line 23 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
+            #line 1 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(StepInput.SDProject.ProjectName.Replace(" ", "")));
             
             #line default
             #line hidden
             this.Write("-Index.html\">Start</a> > <a href=\"");
             
-            #line 23 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
+            #line 1 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(Helper.RemoveIllegalCharacters(SDArticle.Title.Replace(" ", "_"))));
             
             #line default
             #line hidden
             this.Write(".html\">");
             
-            #line 23 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
+            #line 1 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(SDArticle.Title));
             
             #line default
             #line hidden
-            this.Write("</a>\r\n\t\t</div>\r\n\r\n\t\t<div id=\"content\">\r\n\t\t\t<h3 class=\"box-title\">");
+            this.Write("</a>\n\t\t</div>\n\n\t\t");
             
-            #line 27 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
+            #line 1 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
+ if(SDArticle.Content != null) { 
+            
+            #line default
+            #line hidden
+            this.Write("\n\t\t<div id=\"content\">\n\t\t\t<h3 class=\"box-title\">");
+            
+            #line 1 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(StepInput.DocStrings.Article));
             
             #line default
             #line hidden
-            this.Write("</h3>\r\n\t\t\t<div class=\"text-box markdown description\">\r\n\t\t\t\t");
+            this.Write("</h3>\n\t\t\t<div class=\"text-box markdown description\">\n\t\t\t\t");
             
-            #line 29 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
+            #line 1 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
             this.Write(this.ToStringHelper.ToStringWithCulture(new Markdown().Transform(SDArticle.Content.Transform(Helper.TransformLinkToken))));
             
             #line default
             #line hidden
-            this.Write("\r\n\t\t\t</div>\r\n\t\t</div>\r\n    </body>\r\n</html>\r\n\r\n");
+            this.Write("\n\t\t\t</div>\n\t\t</div>\n\t\t");
+            
+            #line 1 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
+ } 
+            
+            #line default
+            #line hidden
+            this.Write("\n    </body>\n</html>\n\n");
             return this.GenerationEnvironment.ToString();
         }
         
-        #line 35 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
+        #line 1 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\ArticleTemplate.tt"
  public SDArticle SDArticle { get; set; } 
         
         #line default

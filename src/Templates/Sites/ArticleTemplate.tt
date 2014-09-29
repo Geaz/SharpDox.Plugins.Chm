@@ -23,12 +23,14 @@
 			<a href="<#= StepInput.SDProject.ProjectName.Replace(" ", "") #>-Index.html">Start</a> > <a href="<#= Helper.RemoveIllegalCharacters(SDArticle.Title.Replace(" ", "_")) #>.html"><#= SDArticle.Title #></a>
 		</div>
 
+		<# if(SDArticle.Content != null) { #>
 		<div id="content">
 			<h3 class="box-title"><#= StepInput.DocStrings.Article #></h3>
 			<div class="text-box markdown description">
 				<#= new Markdown().Transform(SDArticle.Content.Transform(Helper.TransformLinkToken)) #>
 			</div>
 		</div>
+		<# } #>
     </body>
 </html>
 

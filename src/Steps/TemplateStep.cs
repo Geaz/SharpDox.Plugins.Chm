@@ -66,16 +66,8 @@ namespace SharpDox.Plugins.Chm.Steps
             {
                 var articleHtmlFile = Path.Combine(StepInput.TmpPath, Helper.RemoveIllegalCharacters(article.Title.Replace(" ", "_")) + ".html");
 
-                if (article.Content != null)
-                {
-                    var template = new EmptyArticleTemplate { SDArticle = article };
-                    File.WriteAllText(articleHtmlFile, template.TransformText());
-                }
-                else
-                {
-                    var template = new ArticleTemplate { SDArticle = article };
-                    File.WriteAllText(articleHtmlFile, template.TransformText());
-                }
+                var template = new ArticleTemplate { SDArticle = article };
+                File.WriteAllText(articleHtmlFile, template.TransformText());
 
                 CreateArticles(article.Children);
             }
