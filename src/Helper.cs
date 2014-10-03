@@ -1,11 +1,10 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Xml;
 
 namespace SharpDox.Plugins.Chm
 {
     internal static class Helper
-    {      
+    {
         public static string RemoveIllegalCharacters(string filename)
         {
             var illegalCharacters = "\\ / : * ? \" < > | ä ü ö";
@@ -20,18 +19,14 @@ namespace SharpDox.Plugins.Chm
         public static string TransformLinkToken(string linkType, string identifier)
         {
             var link = string.Empty;
-            /*if (linkType == "image")
+            if (linkType == "image")
             {
                 link = string.Format("{0}", identifier);
-            }
-            else if (guid != Guid.Empty)
-            {
-                link = string.Format("{0}.html", guid);
             }
             else
             {
                 link = string.Format("{0}.html", identifier.Replace(' ', '_'));
-            }*/
+            }
             return link;
         }
 
