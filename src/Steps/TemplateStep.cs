@@ -3,7 +3,7 @@ using SharpDox.Plugins.Chm.Templates;
 using SharpDox.Plugins.Chm.Templates.Sites;
 using SharpDox.Plugins.Chm.Templates.Nav;
 using System.Collections.Generic;
-using SharpDox.Model.Documentation;
+using System.Linq;
 using SharpDox.UML;
 using SharpDox.Model.Documentation.Article;
 
@@ -83,37 +83,41 @@ namespace SharpDox.Plugins.Chm.Steps
 
         private void CreateApiIndexFiles()
         {
-            foreach (var repository in StepInput.SDProject.Repositories.Values)
+            foreach(var solution in StepInput.SDProject.Solutions.Values)
             {
-                foreach (var sdNamespace in repository.GetAllNamespaces())
+                var sdRepository = solution.Repositories.SingleOrDefault(r => r.TargetFx.Identifier == StepInput.CurrentTargetFx.Identifier);
+                if(sdRepository != null)
                 {
-                    ExecuteOnStepMessage(string.Format("{0}: {1}", StepInput.ChmStrings.CreateIndexFilesFor, sdNamespace.Fullname));
-
-                    var namespaceHtmlFile = Path.Combine(StepInput.TmpPath, sdNamespace.Guid + ".html");
-                    var template = new NamespaceTemplate { SDNamespace = sdNamespace };
-                    File.WriteAllText(namespaceHtmlFile, template.TransformText());
-
-                    foreach (var sdType in sdNamespace.Types)
+                    foreach (var sdNamespace in sdRepository.GetAllNamespaces())
                     {
-                        var fieldsIndexHtmlFile = Path.Combine(StepInput.TmpPath, sdType.Guid + "-Fields.html");
-                        var fieldsTemplate = new FieldsTemplate { SDType = sdType };
-                        File.WriteAllText(fieldsIndexHtmlFile, fieldsTemplate.TransformText());
+                        ExecuteOnStepMessage(string.Format("{0}: {1}", StepInput.ChmStrings.CreateIndexFilesFor, sdNamespace.Fullname));
 
-                        var eveIndexHtmlFile = Path.Combine(StepInput.TmpPath, sdType.Guid + "-Events.html");
-                        var eventsTemplate = new EventsTemplate { SDType = sdType };
-                        File.WriteAllText(eveIndexHtmlFile, eventsTemplate.TransformText());
+                        var namespaceHtmlFile = Path.Combine(StepInput.TmpPath, sdNamespace.Guid + ".html");
+                        var template = new NamespaceTemplate { SDNamespace = sdNamespace };
+                        File.WriteAllText(namespaceHtmlFile, template.TransformText());
 
-                        var propertiesIndexHtmlFile = Path.Combine(StepInput.TmpPath, sdType.Guid + "-Properties.html");
-                        var propertiesTemplate = new PropertiesTemplate { SDType = sdType };
-                        File.WriteAllText(propertiesIndexHtmlFile, propertiesTemplate.TransformText());
+                        foreach (var sdType in sdNamespace.Types)
+                        {
+                            var fieldsIndexHtmlFile = Path.Combine(StepInput.TmpPath, sdType.Guid + "-Fields.html");
+                            var fieldsTemplate = new FieldsTemplate { SDType = sdType };
+                            File.WriteAllText(fieldsIndexHtmlFile, fieldsTemplate.TransformText());
 
-                        var constructorsIndexHtmlFile = Path.Combine(StepInput.TmpPath, sdType.Guid + "-Constructors.html");
-                        var constructorsTemplate = new ConstructorsTemplate { SDType = sdType };
-                        File.WriteAllText(constructorsIndexHtmlFile, constructorsTemplate.TransformText());
+                            var eveIndexHtmlFile = Path.Combine(StepInput.TmpPath, sdType.Guid + "-Events.html");
+                            var eventsTemplate = new EventsTemplate { SDType = sdType };
+                            File.WriteAllText(eveIndexHtmlFile, eventsTemplate.TransformText());
 
-                        var methodsIndexHtmlFile = Path.Combine(StepInput.TmpPath, sdType.Guid + "-Methods.html");
-                        var methodsTemplate = new MethodsTemplate { SDType = sdType };
-                        File.WriteAllText(methodsIndexHtmlFile, methodsTemplate.TransformText());
+                            var propertiesIndexHtmlFile = Path.Combine(StepInput.TmpPath, sdType.Guid + "-Properties.html");
+                            var propertiesTemplate = new PropertiesTemplate { SDType = sdType };
+                            File.WriteAllText(propertiesIndexHtmlFile, propertiesTemplate.TransformText());
+
+                            var constructorsIndexHtmlFile = Path.Combine(StepInput.TmpPath, sdType.Guid + "-Constructors.html");
+                            var constructorsTemplate = new ConstructorsTemplate { SDType = sdType };
+                            File.WriteAllText(constructorsIndexHtmlFile, constructorsTemplate.TransformText());
+
+                            var methodsIndexHtmlFile = Path.Combine(StepInput.TmpPath, sdType.Guid + "-Methods.html");
+                            var methodsTemplate = new MethodsTemplate { SDType = sdType };
+                            File.WriteAllText(methodsIndexHtmlFile, methodsTemplate.TransformText());
+                        }
                     }
                 }
             }
@@ -121,24 +125,28 @@ namespace SharpDox.Plugins.Chm.Steps
 
         private void CreateTypeFiles()
         {
-            foreach (var repository in StepInput.SDProject.Repositories.Values)
+            foreach (var solution in StepInput.SDProject.Solutions.Values)
             {
-                foreach (var sdNamespace in repository.GetAllNamespaces())
+                var sdRepository = solution.Repositories.SingleOrDefault(r => r.TargetFx.Identifier == StepInput.CurrentTargetFx.Identifier);
+                if (sdRepository != null)
                 {
-                    foreach (var sdType in sdNamespace.Types)
+                    foreach (var sdNamespace in sdRepository.GetAllNamespaces())
                     {
-                        ExecuteOnStepMessage(string.Format("{0}: {1}", StepInput.ChmStrings.CreateType, sdType.Name));
-
-                        var typeHtmlFile = Path.Combine(StepInput.TmpPath, sdType.Guid + ".html");
-
-                        var template = new TypeTemplate { SDType = sdType };
-
-                        if (!sdType.IsClassDiagramEmpty())
+                        foreach (var sdType in sdNamespace.Types)
                         {
-                            sdType.GetClassDiagram().ToPng(Path.Combine(StepInput.TmpPath, "diagrams", sdType.Guid + ".png"));
-                        }
+                            ExecuteOnStepMessage(string.Format("{0}: {1}", StepInput.ChmStrings.CreateType, sdType.Name));
 
-                        File.WriteAllText(typeHtmlFile, template.TransformText());
+                            var typeHtmlFile = Path.Combine(StepInput.TmpPath, sdType.Guid + ".html");
+
+                            var template = new TypeTemplate { SDType = sdType, SDRepository = sdRepository };
+
+                            if (!sdType.IsClassDiagramEmpty())
+                            {
+                                sdType.GetClassDiagram().ToPng(Path.Combine(StepInput.TmpPath, "diagrams", sdType.Guid + ".png"));
+                            }
+
+                            File.WriteAllText(typeHtmlFile, template.TransformText());
+                        }
                     }
                 }
             }

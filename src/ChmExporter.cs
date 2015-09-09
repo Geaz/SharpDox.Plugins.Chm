@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Xml;
-using SharpDox.Model.Repository;
 using SharpDox.Sdk.Exporter;
 using SharpDox.Plugins.Chm.Steps;
 using System.IO;
@@ -34,34 +32,36 @@ namespace SharpDox.Plugins.Chm
         {
             _docCount = sdProject.DocumentationLanguages.Count;
             _docIndex = 0;
-            foreach (var docLanguage in sdProject.DocumentationLanguages)
+
+            foreach(var targetFx in sdProject.GetAllAvailableTargetFxs())
             {
-                StepInput.InitStepinput(sdProject, Path.Combine(outputPath, docLanguage), docLanguage, _localController.GetLocalStringsOrDefault<ChmStrings>(docLanguage), _chmStrings, _chmConfig);
-
-                var steps = new List<StepBase>();
-                steps.Add(new CopyStep(0, 10));
-                steps.Add(new TemplateStep(10, 50));
-                steps.Add(new CompileStep(50, 90));
-                steps.Add(new SaveAndCleanStep(90, 100));
-
-                foreach (var step in steps)
+                foreach (var docLanguage in sdProject.DocumentationLanguages)
                 {
-                    ExecuteOnStepProgress(step.StepRange.ProgressStart);
+                    StepInput.InitStepinput(sdProject, targetFx, Path.Combine(outputPath, docLanguage), docLanguage, _localController.GetLocalStringsOrDefault<ChmStrings>(docLanguage), _chmStrings, _chmConfig);
 
-                    step.OnStepMessage += ExecuteOnStepMessage;
-                    step.OnStepProgress += ExecuteOnStepProgress;
-                    step.RunStep();
+                    var steps = new List<StepBase>();
+                    steps.Add(new CopyStep(0, 10));
+                    steps.Add(new TemplateStep(10, 50));
+                    steps.Add(new CompileStep(50, 90));
+                    steps.Add(new SaveAndCleanStep(90, 100));
+
+                    foreach (var step in steps)
+                    {
+                        ExecuteOnStepProgress(step.StepRange.ProgressStart);
+
+                        step.OnStepMessage += ExecuteOnStepMessage;
+                        step.OnStepProgress += ExecuteOnStepProgress;
+                        step.RunStep();
+                    }
+
+                    _docIndex++;
                 }
-
-                _docIndex++;
-            }
+            }            
         }
 
         public bool CheckRequirements()
         {
-            var config = Helper.LoadConfig();
-            var compilerPath = config.SelectSingleNode("CompilerPath");
-            var requirements = compilerPath != null && !string.IsNullOrEmpty(compilerPath.InnerText) && File.Exists(Path.Combine(compilerPath.InnerText, "hhc.exe"));
+            var requirements = File.Exists(Path.Combine(_chmConfig.CompilerPath, "hhc.exe"));
             if (!requirements)
             {
                 ExecuteOnRequirementsWarning(_chmStrings.CompilerNotFound);

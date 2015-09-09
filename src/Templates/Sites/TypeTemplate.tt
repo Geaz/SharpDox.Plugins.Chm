@@ -106,28 +106,28 @@
 					<# if(documentation.Summary.Count > 0) { #>
 						<h3 class="box-title"><#= StepInput.DocStrings.Summary #></h3>
 						<div class="doc-box markdown">
-							<#= new Markdown().Transform(documentation.Summary.ToMarkdown()) #>
+							<#= new Markdown().Transform(documentation.Summary.ToMarkdown(StepInput.SDProject.Tokens).Transform(Helper.TransformLinkToken)) #>
 						</div>
 					<# } #>
 
 					<# if(documentation.Remarks.Count > 0) { #>
 						<h3 class="box-title"><#= StepInput.DocStrings.Remarks #></h3>
 						<div class="doc-box markdown">
-							<#= new Markdown().Transform(documentation.Remarks.ToMarkdown()) #>
+							<#= new Markdown().Transform(documentation.Remarks.ToMarkdown(StepInput.SDProject.Tokens).Transform(Helper.TransformLinkToken)) #>
 						</div>
 					<# } #>
 
 					<# if(documentation.Example.Count > 0) { #>
 						<h3 class="box-title"><#= StepInput.DocStrings.Example #></h3>
 						<div class="doc-box markdown">
-							<#= new Markdown().Transform(documentation.Example.ToMarkdown()) #>
+							<#= new Markdown().Transform(documentation.Example.ToMarkdown(StepInput.SDProject.Tokens).Transform(Helper.TransformLinkToken)) #>
 						</div>
 					<# } #>
 
-					<# if(documentation.Returns.Count > 0) { #>
+					<# if(documentation.Returns.ContainsKey("default")) { #>
 						<h3 class="box-title"><#= StepInput.DocStrings.Returns #></h3>
 						<div class="doc-box markdown">
-							<#= new Markdown().Transform(documentation.Returns.ToMarkdown()) #>
+							<#= new Markdown().Transform(documentation.Returns["default"].ToMarkdown(StepInput.SDProject.Tokens).Transform(Helper.TransformLinkToken)) #>
 						</div>
 					<# } #>
 
@@ -137,7 +137,7 @@
 							<# foreach(var exception in documentation.Exceptions) { #>
 								<p><#= exception.Key #></p>
 								<div class="inline">
-									<#= new Markdown().Transform(exception.Value.ToMarkdown()) #>
+									<#= new Markdown().Transform(exception.Value.ToMarkdown(StepInput.SDProject.Tokens).Transform(Helper.TransformLinkToken)) #>
 								</div>
 							<# } #>
 						</div>
@@ -149,7 +149,7 @@
 							<# foreach(var parameter in documentation.Params) { #>
 								<p><#= parameter.Key #></p>
 								<div class="inline">
-									<#= new Markdown().Transform(parameter.Value.ToMarkdown()) #>
+									<#= new Markdown().Transform(parameter.Value.ToMarkdown(StepInput.SDProject.Tokens).Transform(Helper.TransformLinkToken)) #>
 								</div>
 							<# } #>
 						</div>
@@ -161,7 +161,7 @@
 							<# foreach(var typeParameter in documentation.TypeParams) { #>
 								<p><#= typeParameter.Key #></p>
 								<div class="inline">
-									<#= new Markdown().Transform(typeParameter.Value.ToMarkdown()) #>
+									<#= new Markdown().Transform(typeParameter.Value.ToMarkdown(StepInput.SDProject.Tokens).Transform(Helper.TransformLinkToken)) #>
 								</div>
 							<# } #>
 						</div>
@@ -177,19 +177,19 @@
 								if(!string.IsNullOrEmpty(seeAlso.DeclaringType))
 								{
 									var identifier = string.Format("{0}.{1}", seeAlso.DeclaringType, seeAlso.Name);
-									var sdMember = StepInput.SDProject.GetMemberByIdentifier(identifier);
+									var sdMember = SDRepository.GetMemberByIdentifier(identifier);
 									if(sdMember != null)
 									{
-										#> <li><a href="<#= sdMember.DeclaringType.Guid #>.html#<#= sdMember.Guid #>"><#= sdMember.Name #></a></li> <#
+										#> <li><a href="../type/<#= sdMember.DeclaringType.Guid #>.html#<#= sdMember.Guid #>"><#= sdMember.Name #></a></li> <#
 									}
 								}
 								else
 								{
 									var identifier = string.Format("{0}.{1}", seeAlso.Namespace, seeAlso.Name);
-									var sdType = StepInput.SDProject.GetTypeByIdentifier(identifier);
+									var sdType = SDRepository.GetTypeByIdentifier(identifier);
 									if(sdType != null)
 									{
-										#> <li><a href="<#= sdType.Guid #>.html"><#= sdType.Fullname #></a></li> <#
+										#> <li><a href="../type/<#= sdType.Guid #>.html"><#= sdType.Fullname #></a></li> <#
 									}
 								} 
 							} #>
@@ -245,7 +245,7 @@
 								</td>	
 								<td class="markdown">
 									<# if(documentation != null && documentation.Summary.Count > 0) { #>
-										<#= new Markdown().Transform(documentation.Summary.ToMarkdown()) #>
+										<#= new Markdown().Transform(documentation.Summary.ToMarkdown(StepInput.SDProject.Tokens).Transform(Helper.TransformLinkToken)) #>
 									<# } #>
 								</td>
 							</tr>
@@ -263,7 +263,7 @@
 								</td>	
 								<td class="markdown">
 									<# if(documentation != null && documentation.Summary.Count > 0) { #>
-										<#= new Markdown().Transform(documentation.Summary.ToMarkdown()) #>
+										<#= new Markdown().Transform(documentation.Summary.ToMarkdown(StepInput.SDProject.Tokens).Transform(Helper.TransformLinkToken)) #>
 									<# } #>
 								</td>
 							</tr>
@@ -281,7 +281,7 @@
 								</td>	
 								<td class="markdown">
 									<# if(documentation != null && documentation.Summary.Count > 0) { #>
-										<#= new Markdown().Transform(documentation.Summary.ToMarkdown()) #>
+										<#= new Markdown().Transform(documentation.Summary.ToMarkdown(StepInput.SDProject.Tokens).Transform(Helper.TransformLinkToken)) #>
 									<# } #>
 								</td>
 							</tr>
@@ -299,7 +299,7 @@
 								</td>	
 								<td class="markdown">
 									<# if(documentation != null && documentation.Summary.Count > 0) { #>
-										<#= new Markdown().Transform(documentation.Summary.ToMarkdown()) #>
+										<#= new Markdown().Transform(documentation.Summary.ToMarkdown(StepInput.SDProject.Tokens).Transform(Helper.TransformLinkToken)) #>
 									<# } #>
 								</td>
 							</tr>
@@ -317,7 +317,7 @@
 								</td>	
 								<td class="markdown">
 									<# if(documentation != null && documentation.Summary.Count > 0) { #>
-										<#= new Markdown().Transform(documentation.Summary.ToMarkdown()) #>
+										<#= new Markdown().Transform(documentation.Summary.ToMarkdown(StepInput.SDProject.Tokens).Transform(Helper.TransformLinkToken)) #>
 									<# } #>
 								</td>
 							</tr>
@@ -337,31 +337,34 @@
 
 		<#	foreach (var constructor in SDType.Constructors)
 			{
-				var memberTemplate = new MemberTemplate { SDMember = constructor }; #>
+				var memberTemplate = new MemberTemplate { SDMember = constructor, SDRepository = SDRepository }; #>
 				<#= memberTemplate.TransformText() #>
 		<#  }
 			foreach (var method in SDType.Methods)
 			{
-				var memberTemplate = new MemberTemplate { SDMember = method }; #>
+				var memberTemplate = new MemberTemplate { SDMember = method, SDRepository = SDRepository }; #>
 				<#= memberTemplate.TransformText() #>
 		<#  }
 			foreach (var field in SDType.Fields)
 			{
-				var memberTemplate = new MemberTemplate { SDMember = field }; #>
+				var memberTemplate = new MemberTemplate { SDMember = field, SDRepository = SDRepository }; #>
 				<#= memberTemplate.TransformText() #>
 		<#  }
 			foreach (var property in SDType.Properties)
 			{
-				var memberTemplate = new MemberTemplate { SDMember = property }; #>
+				var memberTemplate = new MemberTemplate { SDMember = property, SDRepository = SDRepository }; #>
 				<#= memberTemplate.TransformText() #>
 		<#  }
 			foreach (var sdEvent in SDType.Events)
 			{
-				var memberTemplate = new MemberTemplate { SDMember = sdEvent }; #>
+				var memberTemplate = new MemberTemplate { SDMember = sdEvent, SDRepository = SDRepository }; #>
 				<#= memberTemplate.TransformText() #>
 			<# } #>
 
     </body>
 </html>
 
-<#+ public SDType SDType { get; set; } #>
+<#+
+public SDType SDType { get; set; } 
+public SDRepository SDRepository { get; set; } 
+#>

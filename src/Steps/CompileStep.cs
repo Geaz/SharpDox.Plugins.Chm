@@ -11,11 +11,8 @@ namespace SharpDox.Plugins.Chm.Steps
         {
             ExecuteOnStepMessage(StepInput.ChmStrings.Compiling);
 
-            var config = Helper.LoadConfig();
-            var compilerPath = config.SelectSingleNode("CompilerPath").InnerText;
-
             var p = new Process();
-            p.StartInfo.FileName = Path.Combine(compilerPath, "hhc.exe");
+            p.StartInfo.FileName = Path.Combine(StepInput.ChmConfig.CompilerPath, "hhc.exe");
             p.StartInfo.Arguments = "\"" + Path.Combine(StepInput.TmpPath, StepInput.SDProject.ProjectName.Replace(" ", "") + ".hhp") + "\"";
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardOutput = true;

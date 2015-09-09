@@ -32,13 +32,18 @@
 							</object>
 
 						<# if (article is SDDocPlaceholder)
-						{ #>							
+						{ 
+							var sdSolution = StepInput.SDProject.Solutions[((SDDocPlaceholder)article).SolutionFile]; 
+							var sdRepository = sdSolution.Repositories.SingleOrDefault(r => r.TargetFx.Identifier == StepInput.CurrentTargetFx.Identifier);
+							if(sdRepository != null)
+							{ #>							
 								<ul>
-								<# var apiNavTemplate = new ApiNavTemplate { SDRepository = StepInput.SDProject.Repositories[((SDDocPlaceholder)article).SolutionFile] }; #>
+								<# var apiNavTemplate = new ApiNavTemplate { SDRepository = sdRepository }; #>
 								<#= apiNavTemplate.TransformText() #>
 								</ul>
 							</li>
-						<# }
+						<#  } else { #> </li> <# }
+						}
 						else if(article.Children.Count > 0)
 						{ #>
 								<ul>
@@ -51,9 +56,14 @@
 						</li>
 				<#	}
 				} else {
-					var apiNavTemplate = new ApiNavTemplate { SDRepository = StepInput.SDProject.Repositories.Single().Value }; #>
-					<#= apiNavTemplate.TransformText() #>
-				<# } #>
+					var sdSolution = StepInput.SDProject.Solutions.Values.Single();
+					var sdRepository = sdSolution.Repositories.SingleOrDefault(r => r.TargetFx.Identifier == StepInput.CurrentTargetFx.Identifier);
+					if(sdRepository != null)
+					{
+						var apiNavTemplate = new ApiNavTemplate { SDRepository = sdRepository }; #>
+						<#= apiNavTemplate.TransformText() #>
+				<#	}
+				} #>
 
 			</ul>
 		</li>
