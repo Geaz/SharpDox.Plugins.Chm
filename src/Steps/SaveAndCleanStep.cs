@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using SharpDox.Model.Repository;
 
 namespace SharpDox.Plugins.Chm.Steps
 {
@@ -19,10 +18,10 @@ namespace SharpDox.Plugins.Chm.Steps
             {
                 ExecuteOnStepMessage(StepInput.ChmStrings.Saving);
 
-                var copyTo = Path.Combine(path, StepInput.SDProject.ProjectName + "-" + StepInput.CurrentLanguage + ".chm");
+                var copyTo = Path.Combine(path, $"{StepInput.SDProject.ProjectName}-{StepInput.CurrentTargetFx.Name}-{StepInput.CurrentLanguage}.chm");
                 if (appenderNumber > 0)
                 {
-                    copyTo = Path.Combine(path, StepInput.SDProject.ProjectName + appenderNumber + "-" + StepInput.CurrentLanguage + ".chm");
+                    copyTo = Path.Combine(path, $"{StepInput.SDProject.ProjectName}{appenderNumber}-{StepInput.CurrentTargetFx.Name}-{StepInput.CurrentLanguage}.chm");
                 }
 
                 File.Copy(Path.Combine(StepInput.TmpPath, StepInput.SDProject.ProjectName.Replace(" ", "") + ".chm"), copyTo, true);

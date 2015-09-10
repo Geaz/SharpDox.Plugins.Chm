@@ -29,13 +29,5 @@ namespace SharpDox.Plugins.Chm
             }
             return link;
         }
-
-        public static XmlDocument LoadConfig()
-        {
-            var config = new XmlDocument();
-            config.Load(Path.Combine(Path.GetDirectoryName(typeof(ChmExporter).Assembly.Location), "config.xml"));
-
-            return config;
-        }
     }
 }

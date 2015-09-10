@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Xml;
-using SharpDox.Model.Repository;
 using SharpDox.Sdk.Exporter;
 using SharpDox.Plugins.Chm.Steps;
 using System.IO;
 using SharpDox.Model;
 using System.Collections.Generic;
 using SharpDox.Sdk.Local;
+using SharpDox.Model.Repository;
+using System.Linq;
 
 namespace SharpDox.Plugins.Chm
 {
@@ -34,40 +34,62 @@ namespace SharpDox.Plugins.Chm
         {
             _docCount = sdProject.DocumentationLanguages.Count;
             _docIndex = 0;
-            foreach (var docLanguage in sdProject.DocumentationLanguages)
+
+            foreach(var targetFx in sdProject.GetAllAvailableTargetFxs())
             {
-                StepInput.InitStepinput(sdProject, Path.Combine(outputPath, docLanguage), docLanguage, _localController.GetLocalStringsOrDefault<ChmStrings>(docLanguage), _chmStrings, _chmConfig);
-
-                var steps = new List<StepBase>();
-                steps.Add(new CopyStep(0, 10));
-                steps.Add(new TemplateStep(10, 50));
-                steps.Add(new CompileStep(50, 90));
-                steps.Add(new SaveAndCleanStep(90, 100));
-
-                foreach (var step in steps)
+                if (ApiEmpty(sdProject, targetFx))
                 {
-                    ExecuteOnStepProgress(step.StepRange.ProgressStart);
-
-                    step.OnStepMessage += ExecuteOnStepMessage;
-                    step.OnStepProgress += ExecuteOnStepProgress;
-                    step.RunStep();
+                    continue;
                 }
 
-                _docIndex++;
-            }
+                foreach (var docLanguage in sdProject.DocumentationLanguages)
+                {
+                    StepInput.InitStepinput(sdProject, targetFx, Path.Combine(outputPath, docLanguage), docLanguage, _localController.GetLocalStringsOrDefault<ChmStrings>(docLanguage), _chmStrings, _chmConfig);
+
+                    var steps = new List<StepBase>();
+                    steps.Add(new CopyStep(0, 10));
+                    steps.Add(new TemplateStep(10, 50));
+                    steps.Add(new CompileStep(50, 90));
+                    steps.Add(new SaveAndCleanStep(90, 100));
+
+                    foreach (var step in steps)
+                    {
+                        ExecuteOnStepProgress(step.StepRange.ProgressStart);
+
+                        step.OnStepMessage += ExecuteOnStepMessage;
+                        step.OnStepProgress += ExecuteOnStepProgress;
+                        step.RunStep();
+                    }
+
+                    _docIndex++;
+                }
+            }            
         }
 
         public bool CheckRequirements()
         {
-            var config = Helper.LoadConfig();
-            var compilerPath = config.SelectSingleNode("CompilerPath");
-            var requirements = compilerPath != null && !string.IsNullOrEmpty(compilerPath.InnerText) && File.Exists(Path.Combine(compilerPath.InnerText, "hhc.exe"));
+            var requirements = File.Exists(Path.Combine(_chmConfig.CompilerPath, "hhc.exe"));
             if (!requirements)
             {
                 ExecuteOnRequirementsWarning(_chmStrings.CompilerNotFound);
             }
 
             return requirements;
+        }
+
+        private bool ApiEmpty(SDProject sdProject, SDTargetFx targetFx)
+        {
+            var empty = true;
+            foreach (var solution in sdProject.Solutions.Values)
+            {
+                var sdRepository = solution.Repositories.SingleOrDefault(r => r.TargetFx.Identifier == targetFx.Identifier);
+                if (sdRepository != null && sdRepository.GetAllNamespaces().Count > 0)
+                {
+                    empty = false;
+                    break;
+                }
+            }
+            return empty;
         }
 
         internal void ExecuteOnStepMessage(string message)

@@ -27,7 +27,7 @@
 		<div id="content">
 			<div class="markdown">
 				<# var description = StepInput.SDProject.Descriptions.GetElementOrDefault(StepInput.CurrentLanguage); #>
-				<#= description != null ? new Markdown().Transform(description) : "" #>
+				<#= description != null ? new Markdown().Transform(description.Transform(Helper.TransformLinkToken)) : "" #>
 			</div>
 		</div>
     </body>

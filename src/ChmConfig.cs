@@ -4,6 +4,7 @@ using SharpDox.Sdk.Config;
 using SharpDox.Sdk.Config.Attributes;
 using System.Xml;
 using System.IO;
+using SharpDox.Sdk;
 
 namespace SharpDox.Plugins.Chm
 {
@@ -17,6 +18,7 @@ namespace SharpDox.Plugins.Chm
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
         }
 
+        private SDPath _compilerPath;
         private string _backgroundColor;
         private string _textColor;
         private string _linkColor;
@@ -31,33 +33,15 @@ namespace SharpDox.Plugins.Chm
         private string _syntaxBoxTextColor;
         private string _breadCrumBackgroundColor;
 
-        [Exclude]
+        [Required]
         [Name(typeof(ChmStrings), "CompilerPath")]
         [ConfigEditor(EditorType.Folderpicker)]
-        public string CompilerPath
+        public SDPath CompilerPath
         {
-            get 
-            {
-                var config = Helper.LoadConfig();
-                var compilerPath = config.SelectSingleNode("CompilerPath");
-                if (compilerPath != null)
-                {
-                    return compilerPath.InnerText;
-                }
-
-                return string.Empty;
-            }
+            get { return _compilerPath; }
             set
             {
-                var config = Helper.LoadConfig();
-                var compilerPath = config.SelectSingleNode("CompilerPath");
-                if (compilerPath == null)
-                {
-                    compilerPath = config.CreateNode(XmlNodeType.Entity, "CompilerPath", null);
-                }
-
-                compilerPath.InnerText = value;
-                config.Save(Path.Combine(Path.GetDirectoryName(GetType().Assembly.Location), "config.xml"));
+                _compilerPath = value;
                 OnPropertyChanged("CompilerPath");
             }
         }

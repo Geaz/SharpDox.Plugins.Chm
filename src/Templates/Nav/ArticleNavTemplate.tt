@@ -16,10 +16,18 @@
 					<param name="Name" value="<#= WebUtility.HtmlEncode(article.Title) #>">
 					<param name="Local" value="<#= Helper.RemoveIllegalCharacters(article.Title.Replace(" ", "_")) #>.html">
 				</object>
-				<ul>
-				<# var apiNavTemplate = new ApiNavTemplate { SDRepository = StepInput.SDProject.Repositories[((SDDocPlaceholder)article).SolutionFile] }; #>
-				<#= apiNavTemplate.TransformText() #>
-				</ul>
+
+				<# 
+				var sdSolution = StepInput.SDProject.Solutions[((SDDocPlaceholder)article).SolutionFile]; 
+				var sdRepository = sdSolution.Repositories.SingleOrDefault(r => r.TargetFx.Identifier == StepInput.CurrentTargetFx.Identifier);
+				if(sdRepository != null)
+				{ #>							
+					<ul>
+					<# var apiNavTemplate = new ApiNavTemplate { SDRepository = sdRepository }; #>
+					<#= apiNavTemplate.TransformText() #>
+					</ul>
+
+				<# } #>
 			</li>
 		<# }
 		else if (article != null)

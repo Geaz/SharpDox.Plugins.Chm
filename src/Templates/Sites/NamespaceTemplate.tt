@@ -46,8 +46,7 @@
 					</thead>
 					<tbody>
 
-					<# foreach(var type in SDNamespace.Types) { 
-						var sdType = (SDType)StepInput.SDProject.GetTypeByIdentifier(type.Identifier); 						
+					<# foreach(var sdType in SDNamespace.Types) { 						
 						var documentation = sdType.Documentations.GetElementOrDefault(StepInput.CurrentLanguage); #>
 
 						<tr>
@@ -59,7 +58,7 @@
 							</td>	
 							<td class="markdown">
 								<# if(documentation != null && documentation.Summary.Count > 0) { #>
-									<#= new Markdown().Transform(documentation.Summary.ToMarkdown()) #>
+									<#= new Markdown().Transform(documentation.Summary.ToMarkdown(StepInput.SDProject.Tokens).Transform(Helper.TransformLinkToken)) #>
 								<# } #>
 							</td>
 						</tr>
@@ -75,7 +74,7 @@
 				<div class="list-box">
 					<ul>
 					<# foreach(var use in SDNamespace.Uses) { #>
-						<li><a href="<#= use.Fullname #>.html"><#= use.Fullname #></a></li>
+						<li><a href="<#= use.Guid #>.html"><#= use.Fullname #></a></li>
 					<# } #>
 					</ul>
 				</div>
@@ -86,7 +85,7 @@
 				<div class="list-box">
 					<ul>
 					<# foreach(var used in SDNamespace.UsedBy) { #>
-						<li><a href="<#= used.Fullname #>.html"><#= used.Fullname #></a></li>
+						<li><a href="<#= used.Guid #>.html"><#= used.Fullname #></a></li>
 					<# } #>
 					</ul>
 				</div>
