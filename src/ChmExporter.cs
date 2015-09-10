@@ -5,6 +5,8 @@ using System.IO;
 using SharpDox.Model;
 using System.Collections.Generic;
 using SharpDox.Sdk.Local;
+using SharpDox.Model.Repository;
+using System.Linq;
 
 namespace SharpDox.Plugins.Chm
 {
@@ -35,6 +37,11 @@ namespace SharpDox.Plugins.Chm
 
             foreach(var targetFx in sdProject.GetAllAvailableTargetFxs())
             {
+                if (ApiEmpty(sdProject, targetFx))
+                {
+                    continue;
+                }
+
                 foreach (var docLanguage in sdProject.DocumentationLanguages)
                 {
                     StepInput.InitStepinput(sdProject, targetFx, Path.Combine(outputPath, docLanguage), docLanguage, _localController.GetLocalStringsOrDefault<ChmStrings>(docLanguage), _chmStrings, _chmConfig);
@@ -68,6 +75,21 @@ namespace SharpDox.Plugins.Chm
             }
 
             return requirements;
+        }
+
+        private bool ApiEmpty(SDProject sdProject, SDTargetFx targetFx)
+        {
+            var empty = true;
+            foreach (var solution in sdProject.Solutions.Values)
+            {
+                var sdRepository = solution.Repositories.SingleOrDefault(r => r.TargetFx.Identifier == targetFx.Identifier);
+                if (sdRepository != null && sdRepository.GetAllNamespaces().Count > 0)
+                {
+                    empty = false;
+                    break;
+                }
+            }
+            return empty;
         }
 
         internal void ExecuteOnStepMessage(string message)
