@@ -203,7 +203,7 @@
 					<h3 class="box-title"><#= StepInput.DocStrings.Uses #></h3>
 					<div class="list-box">
 						<ul>
-						<# foreach(var use in SDType.Uses.Select(u => u.Type)) { #>
+						<# foreach(var use in SDType.Uses) { #>
 							<li><a href="<#= use.Guid #>.html"><#= use.Name #></a></li>
 						<# } #>
 						</ul>
@@ -214,7 +214,7 @@
 					<h3 class="box-title"><#= StepInput.DocStrings.UsedBy #></h3>
 					<div class="list-box">
 						<ul>
-						<# foreach(var used in SDType.UsedBy.Select(u => u.Type)) { #>
+						<# foreach(var used in SDType.UsedBy) { #>
 							<li><a href="<#= used.Guid #>.html"><#= used.Name #></a></li>
 						<# } #>
 						</ul>

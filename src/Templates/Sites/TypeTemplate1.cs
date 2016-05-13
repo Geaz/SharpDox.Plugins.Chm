@@ -679,7 +679,7 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
             this.Write("</h3>\r\n\t\t\t\t\t<div class=\"list-box\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t");
             
             #line 206 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\TypeTemplate.tt"
- foreach(var use in SDType.Uses.Select(u => u.Type)) { 
+ foreach(var use in SDType.Uses) { 
             
             #line default
             #line hidden
@@ -728,7 +728,7 @@ namespace SharpDox.Plugins.Chm.Templates.Sites
             this.Write("</h3>\r\n\t\t\t\t\t<div class=\"list-box\">\r\n\t\t\t\t\t\t<ul>\r\n\t\t\t\t\t\t");
             
             #line 217 "D:\Github\SharpDox.Plugins.Chm\src\Templates\Sites\TypeTemplate.tt"
- foreach(var used in SDType.UsedBy.Select(u => u.Type)) { 
+ foreach(var used in SDType.UsedBy) { 
             
             #line default
             #line hidden
