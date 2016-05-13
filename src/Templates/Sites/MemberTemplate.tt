@@ -15,10 +15,10 @@
 <div id="<#= SDMember.Guid #>" class="typesite">
 	<div id="header">
 		<h2 class="type-title"><#= SDMember.Name #></h2>
-		<span class="namespace-title"><#= SDMember.DeclaringType.Namespace.Fullname #></span>
+		<span class="namespace-title"><#= SDMember.DeclaringType.Type.Namespace.Fullname #></span>
 	</div>
 	<div id="subheader">
-		<a href="<#= StepInput.SDProject.ProjectName.Replace(" ", "") #>-Index.html">Start</a> > <a href="<#= SDMember.DeclaringType.Namespace.Guid #>.html"><#= SDMember.DeclaringType.Fullname #></a> > <a href="<#= SDMember.DeclaringType.Guid #>.html"><#= SDMember.DeclaringType.Name #> > <a href="<#= SDMember.Guid #>.html"><#= SDMember.Name #></a>
+		<a href="<#= StepInput.SDProject.ProjectName.Replace(" ", "") #>-Index.html">Start</a> > <a href="<#= SDMember.DeclaringType.Type.Namespace.Guid #>.html"><#= SDMember.DeclaringType.Type.Fullname #></a> > <a href="<#= SDMember.DeclaringType.Type.Guid #>.html"><#= SDMember.DeclaringType.Type.Name #> > <a href="<#= SDMember.Guid #>.html"><#= SDMember.Name #></a>
 	</div>
 
 	<div id="content">
@@ -107,7 +107,7 @@
 							var sdMember = SDRepository.GetMemberByIdentifier(identifier);
 							if(sdMember != null)
                             {
-								#> <li><a href="../type/<#= sdMember.DeclaringType.Guid #>.html#<#= sdMember.Guid #>"><#= sdMember.Name #></a></li> <#
+								#> <li><a href="../type/<#= sdMember.DeclaringType.Type.Guid #>.html#<#= sdMember.Guid #>"><#= sdMember.Name #></a></li> <#
                             }
 						}
 						else
@@ -138,6 +138,6 @@
 </div>
 
 <#+ 
-public SDMember SDMember { get; set; }
+public SDMemberBase SDMember { get; set; }
 public SDRepository SDRepository { get; set; } 
 #>

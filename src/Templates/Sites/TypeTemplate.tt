@@ -74,7 +74,7 @@
 					<h3 class="box-title"><#= StepInput.DocStrings.Basetype #></h3>
 					<div class="list-box">
 						<ul>
-						<# foreach(var baseType in SDType.BaseTypes) { 
+						<# foreach(var baseType in SDType.BaseTypes.Select(t => t.Type)) { 
 							if(baseType.IsProjectStranger) { #>
 								<li><#= baseType.Fullname #></a></li>
 							<# } else { #>
@@ -89,7 +89,7 @@
 					<h3 class="box-title"><#= StepInput.DocStrings.Implements #></h3>
 					<div class="list-box">
 						<ul>
-						<# foreach(var implementedInterface in SDType.ImplementedInterfaces) {
+						<# foreach(var implementedInterface in SDType.ImplementedInterfaces.Select(t => t.Type)) {
 							if(implementedInterface.IsProjectStranger) { #>
 								<li><#= implementedInterface.Fullname #></a></li>
 							<# } else { #>
@@ -180,7 +180,7 @@
 									var sdMember = SDRepository.GetMemberByIdentifier(identifier);
 									if(sdMember != null)
 									{
-										#> <li><a href="../type/<#= sdMember.DeclaringType.Guid #>.html#<#= sdMember.Guid #>"><#= sdMember.Name #></a></li> <#
+										#> <li><a href="../type/<#= sdMember.DeclaringType.Type.Guid #>.html#<#= sdMember.Guid #>"><#= sdMember.Name #></a></li> <#
 									}
 								}
 								else
@@ -203,7 +203,7 @@
 					<h3 class="box-title"><#= StepInput.DocStrings.Uses #></h3>
 					<div class="list-box">
 						<ul>
-						<# foreach(var use in SDType.Uses) { #>
+						<# foreach(var use in SDType.Uses.Select(u => u.Type)) { #>
 							<li><a href="<#= use.Guid #>.html"><#= use.Name #></a></li>
 						<# } #>
 						</ul>
@@ -214,7 +214,7 @@
 					<h3 class="box-title"><#= StepInput.DocStrings.UsedBy #></h3>
 					<div class="list-box">
 						<ul>
-						<# foreach(var used in SDType.UsedBy) { #>
+						<# foreach(var used in SDType.UsedBy.Select(u => u.Type)) { #>
 							<li><a href="<#= used.Guid #>.html"><#= used.Name #></a></li>
 						<# } #>
 						</ul>
